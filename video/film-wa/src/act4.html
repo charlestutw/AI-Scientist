@@ -1,0 +1,38 @@
+
+          <!-- ================= ACT 4 反轉 ================= -->
+          <section id="act4" class="act full clip" data-start="{{ACT4_T}}" data-duration="{{ACT4_D}}" data-track-index="0">
+            <svg width="0" height="0" class="abs"><defs>
+              <filter id="a4-rough" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G" result="d"/>
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="8" result="g"/>
+                <feComponentTransfer in="g" result="g2"><feFuncA type="discrete" tableValues="1 1 1 0.2"/></feComponentTransfer>
+                <feComposite in="d" in2="g2" operator="in"/>
+              </filter>
+            </defs></svg>
+            <div id="a4-frozen" class="full" style="transform-origin:960px 500px;transform:translate(-60px,0) scale(.86)">
+              <svg class="full" width="1920" height="1080">
+                <rect x="520" y="690" width="220" height="12" fill="#a8742d" opacity=".9"/>
+                <path d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#2b4c7e" stroke-opacity=".18" stroke-width="16"/>
+                <path d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#1e1b18" stroke-width="3"/>
+                <path id="a4-wave" fill="none" stroke="#2b4c7e" stroke-width="4" d=""/>
+                <circle cx="850" cy="568" r="13" fill="#2b4c7e"/>
+              </svg>
+              <div class="abs" style="left:1460px;top:540px;width:380px;height:90px;border:1px solid rgba(43,76,126,.4);border-radius:4px;background:#ece5d7">
+                <div class="abs" style="left:60px;top:6px;width:5px;height:78px;background:#8b6bb1"></div><div class="abs" style="left:110px;top:6px;width:5px;height:78px;background:#4c6cb3"></div>
+                <div class="abs" style="left:250px;top:6px;width:5px;height:78px;background:#2b4c7e"></div><div class="abs" style="left:330px;top:6px;width:5px;height:78px;background:#c8442f"></div>
+              </div>
+              <div id="a4-scan" class="abs v" style="left:300px;width:1500px;top:300px;height:3px;background:rgba(43,76,126,.8);"></div>
+            </div>
+            <div id="a4-pause" class="abs v" style="left:0;width:1920px;top:150px;text-align:center;font-size:46px;font-weight:700;letter-spacing:.5em;color:#1e1b18">‖ 暫停</div>
+            <div id="a4-derive" class="abs v" style="left:180px;top:330px;font-size:84px;font-weight:900;color:#1e1b18;white-space:nowrap">推導 →
+              <svg class="abs" width="420" height="140" style="left:-20px;top:-10px;overflow:visible"><path id="a4-strike" d="M0 120 L400 10" stroke="#c8442f" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" style="filter:)"/></svg>
+            </div>
+            <div id="a4-stampwrap" class="abs v" style="left:0;top:110px;width:1920px;height:640px;perspective:1200px">
+              <div id="a4-stamp" class="abs stamp" style="left:385px;top:20px;width:1150px;height:600px;color:#c8442f;filter:url(#a4-rough));transform-origin:960px 320px">
+                <div id="a4-w1" class="abs" style="left:0;top:22px;width:1130px;text-align:center;font-size:500px;line-height:1">規定</div>
+                <div id="a4-w2" class="abs" style="left:0;top:22px;width:1130px;text-align:center;font-size:500px;line-height:1;opacity:0">假設</div>
+              </div>
+            </div>
+            <div id="a4-ink" class="full"></div>
+          </section>

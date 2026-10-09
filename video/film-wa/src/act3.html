@@ -1,0 +1,73 @@
+
+          <!-- ================= ACT 3 玻爾的三條規矩 ================= -->
+          <section id="act3" class="act full clip" data-start="{{ACT3_T}}" data-duration="{{ACT3_D}}" data-track-index="0">
+            <div id="a3-pillar" class="abs v" style="left:958px;top:60px;width:4px;height:760px;transform-origin:50% 50%;background:#c8442f"></div>
+            <div id="a3-year" class="abs v" style="left:0;width:1920px;top:120px;text-align:center;white-space:nowrap"><span class="a3-d num yearbig" style="display:inline-block">1</span><span class="a3-d num yearbig" style="display:inline-block">9</span><span class="a3-d num yearbig" style="display:inline-block">1</span><span class="a3-d num yearbig" style="display:inline-block">3</span></div>
+            <div id="a3-bohr" class="card abs v" style="left:800px;top:600px"><div id="a3-bname" class="nm">N. BOHR</div></div>
+
+            <!-- protocol cards -->
+            <div id="a3-protos" class="full v" style="perspective:1400px;perspective-origin:960px 400px">
+              <div class="a3-proto panel abs" style="left:430px;top:210px;width:300px;height:360px"><div class="abs" style="left:30px;top:30px;font-family:Gothic;font-size:24px;letter-spacing:.5em;color:#8a837a">規矩</div><div class="abs" style="left:0;width:300px;top:96px;text-align:center;font-size:200px;font-weight:300;line-height:1;color:#1e1b18">壹</div><div class="abs" style="right:24px;bottom:24px;width:22px;height:22px;background:#c8442f"></div></div>
+              <div class="a3-proto panel abs" style="left:810px;top:210px;width:300px;height:360px"><div class="abs" style="left:30px;top:30px;font-family:Gothic;font-size:24px;letter-spacing:.5em;color:#8a837a">規矩</div><div class="abs" style="left:0;width:300px;top:96px;text-align:center;font-size:200px;font-weight:300;line-height:1;color:#1e1b18">貳</div><div class="abs" style="right:24px;bottom:24px;width:22px;height:22px;background:#c8442f"></div></div>
+              <div class="a3-proto panel abs" style="left:1190px;top:210px;width:300px;height:360px"><div class="abs" style="left:30px;top:30px;font-family:Gothic;font-size:24px;letter-spacing:.5em;color:#8a837a">規矩</div><div class="abs" style="left:0;width:300px;top:96px;text-align:center;font-size:200px;font-weight:300;line-height:1;color:#1e1b18">參</div><div class="abs" style="right:24px;bottom:24px;width:22px;height:22px;background:#c8442f"></div></div>
+              <div id="a3-sweep" class="abs v" style="left:400px;top:200px;width:120px;height:380px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)"></div>
+            </div>
+            <div id="a3-chips" class="abs v" style="left:72px;top:112px;display:flex;gap:12px">
+              <div id="a3-c1" class="chip" style="opacity:.35">壹　固定軌道</div>
+              <div id="a3-c2" class="chip" style="opacity:.35">貳　一層一層</div>
+              <div id="a3-c3" class="chip" style="opacity:.35">參　跳一階放光</div>
+            </div>
+
+            <!-- scene: atom -> stairs -->
+            <div id="a3-scene" class="full" style="transform-origin:960px 500px">
+              <svg class="full" width="1920" height="1080" id="a3-svg">
+                <defs>
+                  <pattern id="a3-hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="14" fill="rgba(200,68,47,.5)"/></pattern>
+                </defs>
+                <g id="a3-rings" opacity="0">
+                  <ellipse class="a3-ring" cx="960" cy="430" rx="120" ry="50" fill="none" stroke="#2b4c7e" stroke-width="2" stroke-opacity=".8" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                  <ellipse class="a3-ring" cx="960" cy="430" rx="200" ry="84" fill="none" stroke="#2b4c7e" stroke-width="2.4" stroke-opacity=".9" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                  <ellipse class="a3-ring" cx="960" cy="430" rx="280" ry="118" fill="none" stroke="#8b6bb1" stroke-width="2" stroke-opacity=".8" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                </g>
+                <g id="a3-field" opacity="0">
+                  <rect x="440" y="704" width="380" height="64" fill="url(#a3-hatch)"/>
+                  <rect x="440" y="704" width="380" height="64" fill="none" stroke="rgba(200,68,47,.8)" stroke-width="2"/>
+                </g>
+                <rect id="a3-floorfill" x="520" y="690" width="220" height="12" fill="#a8742d" opacity="0" style="filter:)"/>
+                <path id="a3-stairs-glow" d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#2b4c7e" stroke-opacity=".18" stroke-width="16" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                <path id="a3-stairs" d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#1e1b18" stroke-width="3" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                <g id="a3-half" opacity="0">
+                  <path id="a3-halfline" d="M640 637 H740" stroke="#8b6bb1" stroke-width="3" stroke-dasharray="8 7"/>
+                  <path class="a3-x" d="M668 615 L712 659" stroke="#c8442f" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                  <path class="a3-x" d="M712 615 L668 659" stroke="#c8442f" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                </g>
+                <path id="a3-wave" d="" fill="none" stroke="#2b4c7e" stroke-width="4" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" style="filter:)"/>
+              </svg>
+              <div id="a3-nucleus" class="nucleus abs v" style="left:914px;top:384px"></div>
+              <div id="a3-e" class="electron abs v"></div>
+              <div id="a3-halflbl" class="abs v" style="left:600px;top:560px;width:140px;height:44px">
+                <div class="a3-hh abs" style="left:0;top:0;width:140px;height:22px;overflow:hidden"><div class="lbl" style="position:absolute;left:0;top:0;width:140px;text-align:center;line-height:44px">半層</div></div>
+                <div class="a3-hh abs" style="left:0;top:22px;width:140px;height:22px;overflow:hidden"><div class="lbl" style="position:absolute;left:0;top:-22px;width:140px;text-align:center;line-height:44px">半層</div></div>
+              </div>
+              <div id="a3-step" class="abs mono v" style="left:1440px;top:250px;font-size:26px;color:var(--ice)">STEP 3 → STEP 4</div>
+              <div id="a3-floor" class="abs v" style="left:60px;top:430px;font-weight:900;font-size:220px;line-height:1;color:#a8742d;">地板</div>
+              <div id="a3-nolower" class="abs v" style="left:440px;top:716px;width:380px;height:40px;overflow:hidden">
+                <div id="a3-marq" class="mono abs" style="left:0;top:4px;font-size:22px;color:#1e1b18;white-space:nowrap">NO LOWER STATE · NO LOWER STATE · NO LOWER STATE · NO LOWER STATE · NO LOWER STATE</div>
+              </div>
+              <div id="a3-ripple" class="full"></div>
+              <div id="a3-lock" class="abs v" style="left:820px;top:530px;width:60px;height:60px;border:2px solid var(--mint);"></div>
+              <div id="a3-sband" class="abs v" style="left:1460px;top:540px;width:380px;height:90px;border:1px solid rgba(43,76,126,.4);border-radius:4px;background:#ece5d7">
+                <div class="abs" style="left:60px;top:6px;width:5px;height:78px;background:#8b6bb1;"></div>
+                <div class="abs" style="left:110px;top:6px;width:5px;height:78px;background:#4c6cb3;"></div>
+                <div id="a3-hitline" class="abs" style="left:250px;top:6px;width:5px;height:78px;background:#2b4c7e;"></div>
+                <div class="abs" style="left:330px;top:6px;width:5px;height:78px;background:#c8442f;"></div>
+              </div>
+              <div id="a3-solved" class="abs mono v" style="left:1460px;top:650px;width:380px;text-align:center;font-size:30px;color:var(--mint);">✓ SOLVED</div>
+              <div id="a3-meter" class="abs v" style="left:1440px;top:300px;width:320px">
+                <div class="num" style="font-size:96px;line-height:1">100%</div>
+                <div class="mono" style="margin-top:12px;font-size:22px;color:var(--mint)">● STABLE</div>
+                <div class="abs" style="left:0;top:150px;width:320px;height:12px;border:1px solid rgba(43,76,126,.5)"><div id="a3-mfill" class="abs" style="left:2px;top:2px;right:2px;bottom:2px;background:var(--ice);"></div></div>
+              </div>
+              <div id="a3-dust" class="full"></div>
+            </div>
+          </section>
