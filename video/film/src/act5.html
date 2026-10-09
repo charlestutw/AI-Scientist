@@ -1,0 +1,129 @@
+
+          <!-- ================= ACT 5 用撞的來驗證 ================= -->
+          <section id="act5" class="act full clip" data-start="{{ACT5_T}}" data-duration="{{ACT5_D}}" data-track-index="0">
+            <!-- 1914 + names -->
+            <div id="a5-year" class="abs num yearbig v" style="left:0;width:1920px;top:110px;text-align:center"><span>191</span><span id="a5-lastd" style="display:inline-block;position:relative;width:.62em;height:1em;vertical-align:top"><span class="abs" style="left:0;top:0;width:100%;text-align:center">3</span><span class="abs" style="left:0;top:0;width:100%;text-align:center">4</span></span></div>
+            <div id="a5-franck" class="card abs v" style="left:470px;top:590px"><div class="nm">J. FRANCK</div></div>
+            <div id="a5-x" class="abs num v" style="left:900px;top:582px;width:120px;text-align:center;font-size:90px;line-height:1;color:var(--ice)">×</div>
+            <div id="a5-hertz" class="card abs v" style="left:1090px;top:590px"><div class="nm">G. HERTZ</div></div>
+
+            <!-- experiment -->
+            <div id="a5-exp" class="full v" style="transform-origin:960px 450px">
+              <svg class="full" width="1920" height="1080">
+                <line id="a5-guide" x1="430" y1="450" x2="1225" y2="450" stroke="#7fe8ff" stroke-opacity=".45" stroke-width="2" stroke-dasharray="10 10"/>
+                <g id="a5-speed" opacity="0"></g>
+                <path id="a5-arc" d="" fill="none" stroke="#7fe8ff" stroke-opacity=".5" stroke-width="2" stroke-dasharray="4 6"/>
+              </svg>
+              <div id="a5-emitter" class="abs" style="left:210px;top:405px;width:220px;height:90px;border-radius:45px;border:2px solid rgba(127,232,255,.7);background:linear-gradient(90deg,rgba(127,232,255,.05),rgba(127,232,255,.22));box-shadow:0 0 30px rgba(43,184,255,.25)">
+                <div class="abs mono" style="left:0;width:220px;top:28px;text-align:center;font-size:22px;color:var(--ice)">EMITTER</div>
+              </div>
+              <div class="lbl abs" style="left:262px;top:510px">電子</div>
+              <div id="a5-atom" class="abs" style="left:1230px;top:330px;width:240px;height:240px;border-radius:50%;
+                background:radial-gradient(circle at 42% 38%, rgba(240,246,255,.95) 0%, rgba(178,199,240,.75) 22%, rgba(118,140,214,.42) 48%, rgba(155,140,255,.15) 68%, transparent 72%);
+                box-shadow:0 0 80px 20px rgba(140,160,240,.18)"></div>
+              <svg id="a5-segs" class="abs" width="320" height="320" style="left:1190px;top:290px"></svg>
+              <div class="lbl abs" style="left:1236px;top:590px;color:#dfe8ff">汞原子</div>
+              <div class="abs mono" style="left:1236px;top:290px;font-size:20px;color:var(--mint);opacity:.9">TARGET</div>
+              <div id="a5-reticle" class="abs v" style="left:1210px;top:310px;width:280px;height:280px">
+                <div class="abs" style="left:0;top:0;width:40px;height:40px;border:solid var(--mint);border-width:3px 0 0 3px"></div>
+                <div class="abs" style="right:0;top:0;width:40px;height:40px;border:solid var(--mint);border-width:3px 3px 0 0"></div>
+                <div class="abs" style="left:0;bottom:0;width:40px;height:40px;border:solid var(--mint);border-width:0 0 3px 3px"></div>
+                <div class="abs" style="right:0;bottom:0;width:40px;height:40px;border:solid var(--mint);border-width:0 3px 3px 0"></div>
+              </div>
+              <div id="a5-energy" class="abs mono v" style="left:210px;top:300px;font-size:24px;color:var(--ice)">ENERGY <span id="a5-ebar">▮▯▯▯</span></div>
+              <div id="a5-hit" class="full"></div>
+              <div id="a5-e" class="electron abs" style="opacity:0"></div>
+              <div id="a5-blk1" class="abs v" style="left:0;top:0;width:44px;height:44px;border-radius:6px;background:linear-gradient(135deg,#fff3d6,#ffc777);box-shadow:0 0 20px 6px rgba(255,190,100,.7)"></div>
+              <div id="a5-blk2" class="abs v" style="left:0;top:0;width:44px;height:44px;border-radius:6px;background:linear-gradient(135deg,#fff3d6,#ffc777);box-shadow:0 0 20px 6px rgba(255,190,100,.7)"></div>
+              <div id="a5-x1" class="abs mono v" style="left:1250px;top:250px;font-size:24px;color:#ffe2b0">×1</div>
+              <div id="a5-eq" class="abs num v" style="left:1290px;top:188px;width:120px;text-align:center;font-size:150px;line-height:1;color:#ffe2b0;text-shadow:0 0 20px rgba(255,190,100,.6)">=</div>
+              <div id="a5-took" class="lbl gold abs v" style="left:1180px;top:662px;width:340px;text-align:center">被拿走一份</div>
+              <div id="a5-same" class="lbl gold abs v" style="left:1180px;top:662px;width:340px;text-align:center">還是那一份</div>
+              <div id="a5-frame" class="abs v" style="inset:0;border:3px solid rgba(255,173,66,.7);border-radius:10px"></div>
+            </div>
+
+            <!-- analogy: vending machine -->
+            <div id="a5-tint" class="full v" style="background:radial-gradient(ellipse at 50% 45%, rgba(255,173,66,.12), transparent 70%)"></div>
+            <div id="a5-vend" class="abs v" style="left:740px;top:130px;width:440px;height:630px;border-radius:22px;border:2px solid rgba(255,173,66,.7);
+              background:linear-gradient(180deg,#1d1309,#0c0804);box-shadow:0 0 70px rgba(255,173,66,.2), inset 0 0 40px rgba(0,0,0,.7)">
+              <div class="abs mono" style="left:34px;top:26px;font-size:20px;color:rgba(255,173,66,.8)">VENDING · 販賣機</div>
+              <div class="abs" style="left:34px;top:70px;width:372px;height:200px;border-radius:8px;background:#060402;border:1px solid rgba(255,173,66,.4)">
+                <div id="a5-only" class="abs mono" style="left:20px;top:16px;font-size:24px;color:var(--amber)">ONLY</div>
+                <div id="a5-d10" class="abs mono" style="left:0;width:372px;top:46px;text-align:center;font-size:120px;line-height:1.1;color:#ffb547;text-shadow:0 0 18px rgba(255,173,66,.9)">10</div>
+                <div id="a5-d50" class="abs mono" style="left:0;width:372px;top:46px;text-align:center;font-size:120px;line-height:1.1;color:#ffb547;text-shadow:0 0 18px rgba(255,173,66,.9);opacity:0">50</div>
+                <div id="a5-dok" class="abs mono" style="left:0;width:372px;top:46px;text-align:center;font-size:120px;line-height:1.1;color:#6cffc8;text-shadow:0 0 18px rgba(108,255,200,.9);opacity:0">OK</div>
+              </div>
+              <div class="abs" style="left:34px;top:300px;width:372px;height:150px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+                <div style="border:1px solid rgba(255,173,66,.3);border-radius:6px"></div><div style="border:1px solid rgba(255,173,66,.3);border-radius:6px"></div><div style="border:1px solid rgba(255,173,66,.3);border-radius:6px"></div><div style="border:1px solid rgba(255,173,66,.3);border-radius:6px"></div>
+              </div>
+              <div class="abs" style="left:300px;top:480px;width:16px;height:60px;border-radius:8px;background:#000;border:2px solid rgba(255,173,66,.8)"></div>
+              <div class="abs mono" style="left:250px;top:548px;font-size:18px;color:rgba(255,173,66,.8)">COIN</div>
+              <div class="abs" style="left:34px;top:520px;width:180px;height:70px;border-radius:8px;background:#000;border:1px solid rgba(255,173,66,.5)"></div>
+            </div>
+            <div id="a5-coin50" class="abs num v" style="left:1250px;top:470px;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff2cf,#ffc458 55%,#b77a1f);color:#5a3a06;font-size:40px;line-height:96px;text-align:center;box-shadow:0 0 24px rgba(255,190,100,.6)">50</div>
+            <div id="a5-coin40" class="abs num v" style="left:787px;top:530px;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff2cf,#ffc458 55%,#b77a1f);color:#5a3a06;font-size:40px;line-height:96px;text-align:center;box-shadow:0 0 24px rgba(255,190,100,.6)">40</div>
+
+            <!-- quanta stacking -->
+            <div id="a5-stack" class="full v">
+              <div class="abs" style="left:840px;top:310px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 42% 38%, rgba(240,246,255,.95) 0%, rgba(178,199,240,.75) 22%, rgba(118,140,214,.42) 48%, rgba(155,140,255,.15) 68%, transparent 72%)"></div>
+              <svg class="abs" width="360" height="360" style="left:780px;top:250px" id="a5-ring4"></svg>
+              <div id="a5-qblocks"></div>
+            </div>
+
+            <!-- verified -->
+            <div id="a5-holo" class="full v" style="transform-origin:960px 500px;transform:scale(.86)">
+              <svg class="full" width="1920" height="1080">
+                <rect x="520" y="690" width="220" height="12" fill="#ffad42" opacity=".9"/>
+                <path d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#7fe8ff" stroke-opacity=".18" stroke-width="16"/>
+                <path d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#d6f8ff" stroke-width="3"/>
+              </svg>
+            </div>
+            <div id="a5-vstampwrap" class="abs v" style="left:0;top:190px;width:1920px;height:480px">
+              <div id="a5-vstamp" class="abs stamp mono" style="left:410px;top:80px;width:1100px;height:300px;color:#6cffc8;font-size:180px;line-height:260px;text-align:center;padding:0;letter-spacing:.06em;filter:url(#a4-rough) drop-shadow(0 0 30px rgba(108,255,200,.5));transform-origin:960px 230px">VERIFIED</div>
+            </div>
+
+            <!-- side note -->
+            <div id="a5-glitchbars" class="full"></div>
+            <div id="a5-note" class="abs mono v" style="left:0;width:1920px;top:380px;text-align:center;font-size:56px;color:#fff;text-shadow:0 0 18px rgba(127,232,255,.8)">SIDE NOTE · 插曲</div>
+
+            <!-- the wrong idea -->
+            <div id="a5-wrong" class="full v">
+              <div class="abs" style="left:840px;top:310px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 42% 38%, rgba(240,246,255,.95) 0%, rgba(178,199,240,.75) 22%, rgba(118,140,214,.42) 48%, rgba(155,140,255,.15) 68%, transparent 72%)"></div>
+              <div id="a5-kick" class="electron abs" style="left:1060px;top:416px"></div>
+              <div class="abs mono" style="left:520px;top:200px;font-size:30px;color:#c9d6e6">HYPOTHESIS<svg class="abs" width="260" height="20" style="left:-10px;top:12px;overflow:visible"><path id="a5-hstrike" d="M0 10 H255" stroke="#ff5c8a" stroke-width="5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></svg></div>
+              <svg class="abs big-x" width="360" height="360" style="left:780px;top:250px"><path class="a5-x" d="M40 40 L320 320" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/><path class="a5-x" d="M320 40 L40 320" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></svg>
+            </div>
+
+            <!-- bars -->
+            <div id="a5-bars" class="full v">
+              <div class="abs" style="left:700px;top:180px;width:160px;text-align:center;font-size:32px;font-weight:700;color:#ffc2d4">撞出原子</div>
+              <div class="abs" style="left:1060px;top:180px;width:160px;text-align:center;font-size:32px;font-weight:700;color:#d6f8ff">實際用到</div>
+              <div id="a5-bar1" class="abs" style="left:720px;top:230px;width:120px;height:490px;transform-origin:50% 100%;background:linear-gradient(180deg,#ff8db0,#ff5c8a 60%,rgba(255,92,138,.4));box-shadow:0 0 30px rgba(255,92,138,.5)"></div>
+              <div id="a5-bar2" class="abs" style="left:1080px;top:520px;width:120px;height:200px;transform-origin:50% 100%;background:linear-gradient(180deg,#d6f8ff,#7fe8ff 60%,rgba(127,232,255,.4));box-shadow:0 0 30px rgba(127,232,255,.5)"></div>
+              <svg class="full" width="1920" height="1080"><path id="a5-gap" d="M860 230 H1240 M1240 230 V520 M1080 520 H1240" fill="none" stroke="#ffc2d4" stroke-width="2" stroke-dasharray="8 6" pathLength="1"/></svg>
+              <div id="a5-much" class="abs" style="left:1262px;top:270px;font-size:48px;font-weight:900;color:#ff8db0;writing-mode:vertical-rl;letter-spacing:.2em">大得多</div>
+            </div>
+
+            <!-- one step up -->
+            <div id="a5-up" class="full v" style="transform-origin:960px 500px;transform:scale(.8)">
+              <svg class="full" width="1920" height="1080">
+                <path d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#7fe8ff" stroke-opacity=".18" stroke-width="16"/>
+                <path d="M440 690 H740 V585 H960 V480 H1180 V375 H1400" fill="none" stroke="#d6f8ff" stroke-width="3"/>
+              </svg>
+              <div id="a5-ue" class="electron abs" style="left:0;top:0"></div>
+              <div id="a5-uplbl" class="abs mono v" style="left:560px;top:400px;font-size:30px;color:var(--mint)">STEP +1 · 上一階</div>
+              <div id="a5-uprip" class="full"></div>
+            </div>
+
+            <!-- Nobel medal -->
+            <div id="a5-medal" class="full v">
+              <svg class="full" width="1920" height="1080">
+                <defs><linearGradient id="a5-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3d6"/><stop offset=".5" stop-color="#ffd08a"/><stop offset="1" stop-color="#e08d3c"/></linearGradient></defs>
+                <g id="a5-rays"></g>
+                <circle id="a5-ring1" cx="960" cy="420" r="230" fill="none" stroke="url(#a5-gold)" stroke-width="4" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                <circle id="a5-ring2" cx="960" cy="420" r="196" fill="none" stroke="#ffd08a" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="3 9"/>
+              </svg>
+              <div id="a5-medalyear" class="abs num" style="left:0;width:1920px;top:310px;text-align:center;font-size:170px;line-height:1;background:linear-gradient(180deg,#fff8e8,#ffd08a 55%,#e08d3c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px rgba(255,190,100,.45))">1925</div>
+              <div id="a5-nobel" class="abs" style="left:0;width:1920px;top:500px;text-align:center;font-size:44px;font-weight:700;letter-spacing:.5em;color:#ffe2b0">諾貝爾獎</div>
+            </div>
+          </section>

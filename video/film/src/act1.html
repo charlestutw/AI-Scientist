@@ -1,0 +1,61 @@
+
+          <!-- ================= ACT 1 拋出問題 ================= -->
+          <section id="act1" class="act full clip" data-start="{{ACT1_T}}" data-duration="{{ACT1_D}}" data-track-index="0">
+            <svg id="a1-bgword" class="full" width="1920" height="1080" aria-hidden="true" style="opacity:0"><path d="{{PATH_ATOM}}" fill="none" stroke="#7fe8ff" stroke-opacity=".55" stroke-width="2"/></svg>
+            <div id="a1-obj" class="full" style="transform-origin:960px 430px;opacity:0">
+              <svg class="full" width="1920" height="1080">
+                <defs>
+                  <linearGradient id="a1-orbgrad" x1="0" x2="1"><stop offset="0" stop-color="#9b8cff"/><stop offset=".5" stop-color="#7fe8ff"/><stop offset="1" stop-color="#d6f8ff"/></linearGradient>
+                </defs>
+                <circle id="a1-halo1" cx="960" cy="430" r="78" fill="none" stroke="#ffd08a" stroke-opacity=".22" stroke-width="1.2"/>
+                <circle id="a1-halo2" cx="960" cy="430" r="104" fill="none" stroke="#ffd08a" stroke-opacity=".10" stroke-width="1" stroke-dasharray="3 6"/>
+                <g transform="rotate(-20 960 430)">
+                  <ellipse class="a1-orb a1-orb-glow" cx="960" cy="430" rx="380" ry="150" fill="none" stroke="#7fe8ff" stroke-opacity=".12" stroke-width="14" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                  <ellipse class="a1-orb a1-orb-line" cx="960" cy="430" rx="380" ry="150" fill="none" stroke="url(#a1-orbgrad)" stroke-opacity=".9" stroke-width="2.2" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+                </g>
+                <path id="a1-nleader" d="M960 486 V512" fill="none" stroke="#ffe2b0" stroke-width="1.5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+              </svg>
+              <div id="a1-shockhost" class="full"></div>
+              <div id="a1-nucleus" class="nucleus abs" style="left:914px;top:384px"></div>
+              <div id="a1-nlabel" class="lbl gold abs v" style="left:912px;top:516px">原子核</div>
+              <div id="a1-ghosts"></div>
+              <div id="a1-parts"></div>
+              <div id="a1-electron" class="electron abs"></div>
+              <div id="a1-elabel" class="lbl abs" style="left:0;top:0;padding-top:100px;opacity:0">電子</div>
+            </div>
+            <div id="a1-flarehost" class="full"></div>
+
+            <div id="a1-panel" class="abs v" style="left:1430px;top:220px;width:400px;height:380px">
+              <div class="panel abs" id="a1-glass" style="inset:0;overflow:hidden">
+                <div class="a1-scan abs" style="left:0;width:100%;height:2px;top:0;background:#7fe8ff;box-shadow:0 0 12px #7fe8ff;opacity:0"></div>
+                <div class="a1-scan abs" style="left:0;width:100%;height:2px;top:95px;background:#7fe8ff;box-shadow:0 0 12px #7fe8ff;opacity:0"></div>
+                <div class="a1-scan abs" style="left:0;width:100%;height:2px;top:190px;background:#7fe8ff;box-shadow:0 0 12px #7fe8ff;opacity:0"></div>
+                <div class="a1-scan abs" style="left:0;width:100%;height:2px;top:285px;background:#7fe8ff;box-shadow:0 0 12px #7fe8ff;opacity:0"></div>
+              </div>
+              <div class="a1-br abs" style="left:-6px;top:-6px;width:22px;height:22px;border:solid var(--hud);border-width:2px 0 0 2px"></div>
+              <div class="a1-br abs" style="right:-6px;top:-6px;width:22px;height:22px;border:solid var(--hud);border-width:2px 2px 0 0"></div>
+              <div class="a1-br abs" style="left:-6px;bottom:-6px;width:22px;height:22px;border:solid var(--hud);border-width:0 0 2px 2px"></div>
+              <div class="a1-br abs" style="right:-6px;bottom:-6px;width:22px;height:22px;border:solid var(--hud);border-width:0 2px 2px 0"></div>
+              <div id="a1-ptitle" class="abs mono" style="left:28px;top:26px;font-size:22px;color:var(--hud)">CLASSICAL / SIM</div>
+              <div id="a1-pwarn" class="abs num" style="left:324px;top:22px;width:48px;height:48px;border:3px solid var(--coral);color:var(--coral);font-size:34px;line-height:42px;text-align:center;opacity:0;box-shadow:0 0 18px var(--coral)">!</div>
+              <div id="a1-pstream" class="abs" style="left:28px;top:80px;width:344px;height:120px;overflow:hidden;font-family:JBMono;font-size:17px;line-height:24px;color:rgba(214,248,255,.62);white-space:pre"><div id="a1-pstream-in" class="abs" style="left:0;top:0"></div></div>
+              <div id="a1-plabel" class="abs" style="left:28px;top:226px;font-size:26px;font-weight:500;color:#e9fbff">能量</div>
+              <div id="a1-pbar" class="abs" style="left:28px;top:280px;width:344px;height:14px;border:1px solid rgba(127,232,255,.5)"><div id="a1-pfill" class="abs" style="left:2px;top:2px;right:2px;bottom:2px;background:var(--hud);transform-origin:0 50%;box-shadow:0 0 14px var(--hud)"></div></div>
+              <div id="a1-pnum" class="abs num" style="left:222px;top:312px;height:48px;display:flex;font-size:40px;line-height:48px;color:#fff">
+                <div class="a1-dcol" id="a1-d0" style="width:25px;height:48px;position:relative;text-align:center">1</div>
+                <div class="a1-dcol" id="a1-d1" style="width:25px;height:48px;position:relative"><span class="abs" style="left:0;top:0;width:25px;text-align:center">0</span><span class="abs" style="left:0;top:0;width:25px;text-align:center">0</span></div>
+                <div class="a1-dcol" id="a1-d2" style="width:25px;height:48px;position:relative"><span class="abs" style="left:0;top:0;width:25px;text-align:center">0</span><span class="abs" style="left:0;top:0;width:25px;text-align:center">0</span></div>
+                <div style="font-size:28px;margin-left:4px;color:rgba(255,255,255,.7)">%</div>
+              </div>
+            </div>
+            <div id="a1-rewind" class="abs mono v" style="left:0;width:1920px;top:120px;text-align:center;font-size:40px;color:var(--coral);text-shadow:0 0 18px var(--coral);white-space:nowrap">◀◀ REWIND</div>
+            <div class="a1-tear abs" style="left:0;width:1920px;height:3px;top:180px;background:rgba(233,251,255,.85);box-shadow:0 0 10px rgba(127,232,255,.9);opacity:0"></div>
+            <div class="a1-tear abs" style="left:0;width:1920px;height:3px;top:410px;background:rgba(233,251,255,.85);box-shadow:0 0 10px rgba(127,232,255,.9);opacity:0"></div>
+            <div class="a1-tear abs" style="left:0;width:1920px;height:3px;top:560px;background:rgba(233,251,255,.85);box-shadow:0 0 10px rgba(127,232,255,.9);opacity:0"></div>
+            <div class="a1-tear abs" style="left:0;width:1920px;height:3px;top:770px;background:rgba(233,251,255,.85);box-shadow:0 0 10px rgba(127,232,255,.9);opacity:0"></div>
+            <svg id="a1-qmark" class="full" width="1920" height="1080" style="opacity:0">
+              <defs><linearGradient id="a1-qgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8db0"/><stop offset="1" stop-color="#9b8cff"/></linearGradient></defs>
+              <path id="a1-qfill" d="{{PATH_QMARK}}" fill="url(#a1-qgrad)" opacity="0"/>
+              <path id="a1-qline" d="{{PATH_QMARK}}" fill="none" stroke="#ff5c8a" stroke-width="4" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" style="filter:drop-shadow(0 0 16px rgba(255,92,138,.8))"/>
+            </svg>
+          </section>

@@ -1,0 +1,98 @@
+
+@font-face { font-family: "NotoSansTC"; src: url(./fonts/notosanstc-var.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "SpaceGrotesk"; src: url(./fonts/spacegrotesk-var.woff2) format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "JBMono"; src: url(./fonts/jbmono-var.woff2) format("woff2"); font-weight: 400 800; }
+
+/* ---------- palette ----------
+   ice    #7fe8ff  primary light (electrons, key words, UI)
+   violet #9b8cff  depth accent (nebula, secondary rings)
+   gold   #ffd08a  nucleus / warm energy
+   coral  #ff5c8a  alerts, negation, impact
+   mint   #6cffc8  confirmation
+   amber  #ffad42  analogies (bus board, vending machine) */
+:root { --ice: #7fe8ff; --violet: #9b8cff; --gold: #ffd08a; --coral: #ff5c8a; --mint: #6cffc8; --amber: #ffad42; --hud: #7fe8ff; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; background: #03050f; }
+#root { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: #fff; font-family: NotoSansTC, sans-serif;
+  background: radial-gradient(ellipse 75% 65% at 50% 42%, #0d1638 0%, #070b20 52%, #03050f 100%); }
+.abs { position: absolute; }
+.full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.mono { font-family: JBMono, monospace; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+.num { font-family: SpaceGrotesk, sans-serif; font-weight: 700; font-variant-numeric: tabular-nums; }
+.v { opacity: 0; }                       /* elements revealed by the timeline */
+.act { overflow: hidden; }
+.act svg { overflow: visible; }
+
+/* ---------- world ---------- */
+#stage { perspective: 1600px; perspective-origin: 960px 430px; }
+#world { transform-origin: 960px 430px; }
+#nebula { background: radial-gradient(ellipse 40% 35% at 78% 18%, rgba(155,140,255,.13), transparent 70%),
+  radial-gradient(ellipse 35% 30% at 15% 80%, rgba(43,184,255,.08), transparent 70%); }
+#grid { left: -480px; top: 650px; width: 2880px; height: 900px; transform-origin: 50% 0; transform: rotateX(74deg);
+  background-image: linear-gradient(rgba(127,232,255,.2) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(127,232,255,.2) 1.5px, transparent 1.5px);
+  background-size: 96px 96px; opacity: .3; -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 70%); }
+#streaks { opacity: 0; transform-origin: 960px 430px; }
+
+/* ---------- shared components ---------- */
+.nucleus { width: 92px; height: 92px; border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #fffaf0 0%, #ffe6b5 20%, #ffc777 46%, #e08d3c 76%, #7d3c14 100%);
+  box-shadow: 0 0 0 1px rgba(255,226,168,.35), 0 0 26px 4px rgba(255,190,100,.5), 0 0 110px 36px rgba(255,170,80,.15),
+    inset -10px -12px 22px rgba(70,25,0,.45), inset 5px 5px 14px rgba(255,255,255,.35); }
+.nucleus::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset -4px -3px 6px rgba(127,232,255,.55); }
+.electron { left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; background: #f4fdff;
+  box-shadow: 0 0 8px 2px #7fe8ff, 0 0 36px 12px rgba(43,184,255,.5); }
+.ghost { left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; background: #7fe8ff; box-shadow: 0 0 12px 4px rgba(43,184,255,.4); }
+.pt { left: 0; top: 0; width: 5px; height: 5px; border-radius: 50%; background: #d6f8ff; box-shadow: 0 0 8px 2px rgba(127,232,255,.7); }
+.lbl { font-weight: 500; font-size: 32px; color: #d6f8ff; white-space: nowrap; text-shadow: 0 0 12px rgba(43,184,255,.7); }
+.lbl.gold { color: #ffe2b0; text-shadow: 0 0 12px rgba(255,170,80,.5); }
+.tag { font-size: 22px; color: var(--ice); white-space: nowrap; }
+
+.card { padding: 26px 34px 26px 40px; border: 1px solid rgba(127,232,255,.4); border-radius: 6px; white-space: nowrap;
+  background: linear-gradient(150deg, rgba(127,232,255,.12), rgba(155,140,255,.05)); box-shadow: inset 0 0 40px rgba(127,232,255,.06), 0 20px 60px rgba(0,0,0,.4); }
+.card::before { content: ""; position: absolute; left: 0; top: 16px; bottom: 16px; width: 4px; background: var(--ice); box-shadow: 0 0 12px var(--ice); }
+.card .nm { font-family: JBMono; font-weight: 600; font-size: 40px; letter-spacing: .14em; color: #fff; }
+.card .rl { margin-top: 10px; font-size: 30px; font-weight: 500; color: rgba(214,248,255,.8); letter-spacing: .1em; }
+.chip { padding: 8px 16px; border: 1px solid rgba(127,232,255,.5); border-radius: 3px; font-size: 20px; color: var(--ice); white-space: nowrap; background: rgba(3,5,15,.5); }
+.yearbig { font-size: 420px; line-height: 1; white-space: nowrap; letter-spacing: -.01em;
+  background: linear-gradient(180deg, #ffffff 0%, #d6f8ff 45%, #7fe8ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 30px rgba(43,184,255,.45)); }
+.panel { border: 1px solid rgba(127,232,255,.45); border-radius: 6px; background: linear-gradient(160deg, rgba(127,232,255,.10), rgba(127,232,255,.03));
+  box-shadow: inset 0 0 40px rgba(127,232,255,.08); }
+.stamp { border: 10px solid currentColor; border-radius: 18px; padding: 10px 46px; font-weight: 900; line-height: 1.1; white-space: nowrap; }
+.big-x path { stroke: var(--coral); stroke-width: 18; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 14px rgba(255,92,138,.8)); }
+.glow-ice { filter: drop-shadow(0 0 10px rgba(127,232,255,.8)); }
+.glow-gold { filter: drop-shadow(0 0 10px rgba(255,190,100,.8)); }
+
+/* ---------- HUD ---------- */
+.corner { width: 44px; height: 44px; border-color: var(--hud); border-style: solid; opacity: .55; }
+.actlbl { left: 72px; top: 54px; display: flex; align-items: baseline; gap: 18px; white-space: nowrap; }
+.actno { font-size: 22px; color: var(--hud); }
+.actname { font-size: 26px; font-weight: 500; color: rgba(255,255,255,.78); letter-spacing: .08em; }
+#badge { left: 1784px; top: 46px; width: 64px; height: 64px; }
+#badge .sq { position: absolute; inset: 0; border: 2px solid var(--hud); display: grid; place-items: center; font-family: SpaceGrotesk; font-weight: 700; font-size: 34px; color: #fff; }
+#badge svg { position: absolute; left: -18px; top: -18px; }
+#prog { left: 72px; top: 1030px; width: 1776px; height: 2px; background: rgba(127,232,255,.14); }
+#progfill { position: absolute; inset: 0; background: var(--hud); transform-origin: 0 50%; box-shadow: 0 0 10px var(--hud); }
+#proghead { position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 3px var(--hud); }
+.tick { position: absolute; top: -5px; width: 2px; height: 12px; background: rgba(127,232,255,.5); }
+
+/* ---------- subtitles ---------- */
+.sub { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+.sub .meta { position: absolute; left: 0; width: 1920px; top: 812px; text-align: center; font-size: 21px; color: rgba(127,232,255,.72); white-space: nowrap; }
+.sub .line { position: absolute; left: 0; width: 1920px; top: 856px; text-align: center; }
+.sub .txt { display: inline-block; position: relative; font-weight: 900; font-size: 88px; line-height: 1.2; letter-spacing: .02em; white-space: nowrap; text-shadow: 0 6px 30px rgba(0,0,0,.9); }
+.sub .ch { display: inline-block; opacity: 0; }
+.sub .ch.w { min-width: .5em; text-align: center; }
+.sub em { font-style: normal; color: var(--ice); position: relative; display: inline-block; text-shadow: 0 0 22px rgba(43,184,255,.75), 0 0 60px rgba(43,184,255,.35); }
+.sub em .ul { position: absolute; left: 4%; right: 4%; bottom: -6px; height: 3px; background: var(--ice); box-shadow: 0 0 12px var(--ice); transform: scaleX(0); }
+.sub .scanwrap { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; }
+.sub .scanline { position: absolute; top: -10px; bottom: -10px; width: 4px; right: -2px; background: #e9fbff; box-shadow: 0 0 18px 6px rgba(127,232,255,.9), 0 0 60px 20px rgba(127,232,255,.35); }
+
+/* ---------- overlays ---------- */
+#neg { background: #fff; mix-blend-mode: difference; opacity: 0; }
+#flash { background: #fff; opacity: 0; }
+#fade { background: #000; opacity: 1; }
+#grain { opacity: 0; mix-blend-mode: screen;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); }
+.impact { left: 0; width: 1920px; top: 110px; text-align: center; font-weight: 900; font-size: 640px; line-height: 1; white-space: nowrap; opacity: 0; }
+.slat { position: absolute; left: 0; width: 1920px; height: 90px; background: #03050f; transform: scaleY(0); }
