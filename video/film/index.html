@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="zh-Hant" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <style>
+      @font-face { font-family: "NotoSansTC"; src: url(./fonts/notosanstc-var.woff2) format("woff2"); font-weight: 100 900; }
+      @font-face { font-family: "SpaceGrotesk"; src: url(./fonts/spacegrotesk-var.woff2) format("woff2"); font-weight: 300 700; }
+      @font-face { font-family: "JBMono"; src: url(./fonts/jbmono-var.woff2) format("woff2"); font-weight: 400 800; }
+
+      :root { --cyan: #5ee7ff; --mag: #ff4d9a; --hud: #5ee7ff; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #02030a; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; color: #fff;
+        background: radial-gradient(ellipse 70% 60% at 50% 40%, #12183a 0%, #070915 55%, #02030a 100%);
+        font-family: NotoSansTC, sans-serif; }
+      .abs { position: absolute; }
+      .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+      .mono { font-family: JBMono, monospace; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+
+      /* ---------- world (camera) ---------- */
+      #stage { perspective: 1600px; perspective-origin: 960px 430px; }
+      #world { transform-origin: 960px 430px; }
+      #bgword { opacity: 0.08; }
+      #grid { left: -480px; top: 640px; width: 2880px; height: 900px; transform-origin: 50% 0; transform: rotateX(74deg);
+        background-image: linear-gradient(rgba(94,231,255,.22) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(94,231,255,.22) 1.5px, transparent 1.5px);
+        background-size: 96px 96px; opacity: .35;
+        -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 70%); }
+      #obj { transform-origin: 960px 430px; }
+      #nucleus { left: 905px; top: 375px; width: 110px; height: 110px; border-radius: 50%;
+        background: radial-gradient(circle at 38% 35%, #fff3d6 0%, #ffb24a 30%, #ff4d6d 70%, #9b1d4a 100%);
+        box-shadow: 0 0 40px 10px rgba(255,106,77,.55), 0 0 140px 50px rgba(255,61,127,.22); }
+      .e { left: 0; top: 0; border-radius: 50%; }
+      #electron { width: 30px; height: 30px; background: #f2fdff;
+        box-shadow: 0 0 10px 3px #5ee7ff, 0 0 44px 16px rgba(0,183,255,.55); }
+      .ghost { width: 18px; height: 18px; background: #5ee7ff; box-shadow: 0 0 14px 5px rgba(0,183,255,.45); }
+      .pt { width: 6px; height: 6px; background: #bff6ff; box-shadow: 0 0 8px 2px rgba(94,231,255,.7); }
+      #elabel { left: 0; top: 0; padding-top: 104px; font-weight: 500; font-size: 32px; color: #bff6ff; white-space: nowrap;
+        text-shadow: 0 0 12px rgba(0,183,255,.9); }
+      #nlabel { left: 912px; top: 516px; font-weight: 500; font-size: 32px; color: #ffd2b0; white-space: nowrap; }
+      #shock { left: 910px; top: 380px; width: 100px; height: 100px; border-radius: 50%; border: 6px solid #ffe3f0;
+        box-shadow: 0 0 30px 8px rgba(255,77,154,.8), inset 0 0 30px 8px rgba(255,77,154,.6); opacity: 0; }
+      #flare { left: 0; top: 426px; width: 1920px; height: 8px; opacity: 0; transform-origin: 960px 4px;
+        background: linear-gradient(90deg, transparent, rgba(255,77,154,.0) 10%, rgba(255,180,220,.9) 45%, #fff 50%, rgba(255,180,220,.9) 55%, rgba(255,77,154,0) 90%, transparent);
+        box-shadow: 0 0 24px 6px rgba(255,77,154,.6); }
+
+      /* ---------- panel ---------- */
+      #panel { left: 1430px; top: 220px; width: 400px; height: 380px; opacity: 0; }
+      #panel .glass { position: absolute; inset: 0; border: 1px solid rgba(94,231,255,.45); border-radius: 6px;
+        background: linear-gradient(160deg, rgba(94,231,255,.10), rgba(94,231,255,.03)); box-shadow: inset 0 0 40px rgba(94,231,255,.08); overflow: hidden; }
+      #panel .scan { position: absolute; left: 0; width: 100%; height: 2px; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); opacity: 0; }
+      #panel .br { position: absolute; width: 22px; height: 22px; border-color: var(--hud); border-style: solid; border-width: 0; }
+      #ptitle { left: 28px; top: 26px; font-size: 22px; color: var(--hud); }
+      #pstream { left: 28px; top: 80px; width: 344px; height: 120px; overflow: hidden; font-family: JBMono; font-size: 17px; line-height: 24px; color: rgba(191,246,255,.62); white-space: pre; }
+      #pstream-in { position: absolute; left: 0; top: 0; }
+      #plabel { left: 28px; top: 226px; font-size: 26px; font-weight: 500; color: #e9fbff; }
+      #pbar { left: 28px; top: 280px; width: 344px; height: 14px; border: 1px solid rgba(94,231,255,.5); }
+      #pfill { position: absolute; left: 2px; top: 2px; right: 2px; bottom: 2px; background: var(--hud); transform-origin: 0 50%; box-shadow: 0 0 14px var(--hud); }
+      #pnum { left: 222px; top: 312px; height: 48px; overflow: hidden; display: flex; font-family: SpaceGrotesk; font-weight: 700; font-size: 40px; line-height: 48px; color: #fff; }
+      .dcol { width: 25px; text-align: center; height: 48px; position: relative; }
+      .dcol .da, .dcol .db { position: absolute; left: 0; top: 0; width: 25px; text-align: center; }
+      #pwarn { left: 324px; top: 22px; width: 48px; height: 48px; border: 3px solid var(--mag); color: var(--mag); font-family: SpaceGrotesk; font-weight: 700;
+        font-size: 34px; line-height: 42px; text-align: center; opacity: 0; box-shadow: 0 0 18px var(--mag); }
+
+      /* ---------- HUD ---------- */
+      .corner { width: 44px; height: 44px; border-color: var(--hud); border-style: solid; opacity: .55; }
+      #actlbl { left: 72px; top: 54px; display: flex; align-items: baseline; gap: 18px; white-space: nowrap; }
+      #actno { font-size: 22px; color: var(--hud); }
+      #actname { font-size: 26px; font-weight: 500; color: rgba(255,255,255,.75); letter-spacing: .08em; }
+      #badge { left: 1784px; top: 46px; width: 64px; height: 64px; }
+      #badge .sq { position: absolute; inset: 0; border: 2px solid var(--hud); display: grid; place-items: center;
+        font-family: SpaceGrotesk; font-weight: 700; font-size: 34px; color: #fff; }
+      #badge svg { position: absolute; left: -18px; top: -18px; }
+      #prog { left: 72px; top: 1030px; width: 1776px; height: 2px; background: rgba(94,231,255,.14); }
+      #progfill { position: absolute; inset: 0; background: var(--hud); transform-origin: 0 50%; box-shadow: 0 0 10px var(--hud); }
+      .tick { position: absolute; top: -5px; width: 2px; height: 12px; background: rgba(94,231,255,.5); }
+      #rewind { left: 0; width: 1920px; top: 120px; text-align: center; font-size: 40px; color: var(--mag); opacity: 0;
+        text-shadow: 0 0 18px var(--mag); white-space: nowrap; }
+
+      /* ---------- subtitles ---------- */
+      .sub { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+      .sub .meta { position: absolute; left: 0; width: 1920px; top: 812px; text-align: center; font-size: 21px; color: rgba(94,231,255,.7); white-space: nowrap; }
+      .sub .line { position: absolute; left: 0; width: 1920px; top: 856px; text-align: center; }
+      .sub .txt { display: inline-block; position: relative; font-weight: 900; font-size: 88px; line-height: 1.2; letter-spacing: .02em; white-space: nowrap;
+        text-shadow: 0 6px 30px rgba(0,0,0,.9); }
+      .sub .ch { display: inline-block; opacity: 0; }
+      .sub .ch.w { width: 1em; text-align: center; }
+      .sub em { font-style: normal; color: var(--cyan); position: relative; display: inline-block;
+        text-shadow: 0 0 22px rgba(0,183,255,.75), 0 0 60px rgba(0,183,255,.35); }
+      .sub em .ul { position: absolute; left: 4%; right: 4%; bottom: -6px; height: 3px; background: var(--cyan);
+        box-shadow: 0 0 12px var(--cyan); transform: scaleX(0); }
+      .sub .scanwrap { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; }
+      .sub .scanline { position: absolute; top: -10px; bottom: -10px; width: 4px; right: -2px; background: #e9fbff;
+        box-shadow: 0 0 18px 6px rgba(94,231,255,.9), 0 0 60px 20px rgba(94,231,255,.35); }
+
+      /* ---------- impact / overlays ---------- */
+      #impactword { left: 0; width: 1920px; top: 110px; text-align: center; font-weight: 900; font-size: 640px; line-height: 1;
+        color: var(--mag); opacity: 0; white-space: nowrap; text-shadow: 0 0 80px rgba(255,77,154,.8); }
+      #neg { background: #fff; mix-blend-mode: difference; opacity: 0; }
+      .tear { left: 0; width: 1920px; height: 3px; background: rgba(233,251,255,.85); opacity: 0; box-shadow: 0 0 10px rgba(94,231,255,.9); }
+      #flash { background: #fff; opacity: 0; }
+      #fade { background: #000; opacity: 1; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1920" data-height="1080">
+      <div id="stage" class="full">
+        <div id="world" class="full">
+          <svg id="stars" class="full" width="1920" height="1080"></svg>
+          <svg id="bgword" class="full" width="1920" height="1080" aria-hidden="true"><path d="M-130.64 590.0 -34.959999999999994 226.0H84.64000000000001L180.32 590.0H109.60000000000002L89.84 509.92H-40.16L-59.92 590.0ZM-24.039999999999992 446.48H73.72L29.52000000000001 269.15999999999997H20.159999999999997ZM318.24 590.0V288.4H212.16V226.0H492.96000000000004V288.4H386.88V590.0ZM691.2 597.28Q622.5600000000001 597.28 582.0 559.5799999999999Q541.44 521.88 541.44 451.68V364.32Q541.44 294.12 582.0 256.41999999999996Q622.5600000000001 218.71999999999997 691.2 218.71999999999997Q759.84 218.71999999999997 800.4000000000001 256.41999999999996Q840.96 294.12 840.96 364.32V451.68Q840.96 521.88 800.4000000000001 559.5799999999999Q759.84 597.28 691.2 597.28ZM691.2 535.92Q729.6800000000001 535.92 751.0 513.56Q772.32 491.2 772.32 453.76V362.24Q772.32 324.8 751.0 302.44Q729.6800000000001 280.08 691.2 280.08Q653.24 280.08 631.6600000000001 302.44Q610.08 324.8 610.08 362.24V453.76Q610.08 491.2 631.6600000000001 513.56Q653.24 535.92 691.2 535.92ZM911.2800000000001 590.0V226.0H1038.68L1101.6000000000001 543.2H1110.96L1173.88 226.0H1301.28V590.0H1234.72V276.44H1225.3600000000001L1162.96 590.0H1049.6000000000001L987.2 276.44H977.84V590.0Z" fill="none" stroke="#5ee7ff" stroke-opacity=".55" stroke-width="2"/></svg>
+          <div id="grid" class="abs"></div>
+          <svg id="streaks" class="full" width="1920" height="1080"></svg>
+
+          <!-- act 1 -->
+          <section id="act1" class="full clip" data-start="0" data-duration="10" data-track-index="0">
+            <div id="obj" class="full">
+              <svg class="full" width="1920" height="1080">
+                <g id="orbitg" transform="rotate(-20 960 430)">
+                  <ellipse cx="960" cy="430" rx="380" ry="150" fill="none" stroke="#5ee7ff" stroke-opacity=".16" stroke-width="16" pathLength="1" stroke-dasharray="1 1" class="orb orb-glow"/>
+                  <ellipse cx="960" cy="430" rx="380" ry="150" fill="none" stroke="#7af0ff" stroke-opacity=".85" stroke-width="2.5" pathLength="1" stroke-dasharray="1 1" class="orb orb-line"/>
+                </g>
+                <path id="nleader" d="M960 492 V512" fill="none" stroke="#ffd2b0" stroke-width="1.5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+              </svg>
+              <div id="shock" class="abs"></div>
+              <div id="nucleus" class="abs"></div>
+              <div id="nlabel" class="abs" style="opacity:0">原子核</div>
+              <div id="ghosts"></div>
+              <div id="parts"></div>
+              <div id="electron" class="abs e"></div>
+              <div id="elabel" class="abs">電子</div>
+            </div>
+            <div id="flare" class="abs"></div>
+
+            <div id="panel" class="abs">
+              <div class="glass">
+                <div class="scan" style="top:0"></div><div class="scan" style="top:95px"></div>
+                <div class="scan" style="top:190px"></div><div class="scan" style="top:285px"></div>
+              </div>
+              <div class="br" style="left:-6px;top:-6px;border-left-width:2px;border-top-width:2px"></div>
+              <div class="br" style="right:-6px;top:-6px;border-right-width:2px;border-top-width:2px"></div>
+              <div class="br" style="left:-6px;bottom:-6px;border-left-width:2px;border-bottom-width:2px"></div>
+              <div class="br" style="right:-6px;bottom:-6px;border-right-width:2px;border-bottom-width:2px"></div>
+              <div id="ptitle" class="abs mono">CLASSICAL / SIM</div>
+              <div id="pwarn" class="abs">!</div>
+              <div id="pstream" class="abs"><div id="pstream-in"></div></div>
+              <div id="plabel" class="abs">能量</div>
+              <div id="pbar" class="abs"><div id="pfill"></div></div>
+              <div id="pnum" class="abs">
+                <div class="dcol" id="d0">1</div>
+                <div class="dcol" id="d1"><span class="da">0</span><span class="db">0</span></div>
+                <div class="dcol" id="d2"><span class="da">0</span><span class="db">0</span></div>
+                <div style="font-size:28px;margin-left:4px;color:rgba(255,255,255,.7)">%</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- HUD -->
+      <div id="hud" class="full">
+        <div class="corner abs" style="left:40px;top:30px;border-width:2px 0 0 2px"></div>
+        <div class="corner abs" style="right:40px;top:30px;border-width:2px 2px 0 0"></div>
+        <div class="corner abs" style="left:40px;bottom:30px;border-width:0 0 2px 2px"></div>
+        <div class="corner abs" style="right:40px;bottom:30px;border-width:0 2px 2px 0"></div>
+        <div id="actlbl" class="abs"><span id="actno" class="mono">ACT 01</span><span id="actname">／ 拋出問題</span></div>
+        <div id="badge" class="abs">
+          <svg width="100" height="100"><circle id="badgering" cx="50" cy="50" r="46" fill="none" stroke="#5ee7ff" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="4 7"/></svg>
+          <div class="sq">H</div>
+        </div>
+        <div id="prog" class="abs"><div id="progfill"></div></div>
+        <div id="rewind" class="abs mono">◀◀ REWIND</div>
+      </div>
+
+      <!-- subtitles: data-start / data-duration follow 分鏡.md (30 fps frame-exact) -->
+      <div id="sub-01" class="sub clip" data-start="0" data-duration="2.7" data-track-index="1" data-reveal="scan" data-delay="0.45">
+        <div class="meta mono">— 01 / 56 —　T+00:00:00</div><div class="line"><span class="txt">電子一直繞著<em>原子核</em>轉</span></div></div>
+      <div id="sub-02" class="sub clip" data-start="2.7" data-duration="2.1667" data-track-index="1" data-reveal="decode">
+        <div class="meta mono">— 02 / 56 —　T+00:02:21</div><div class="line"><span class="txt">照舊物理的算法……</span></div></div>
+      <div id="sub-03" class="sub clip" data-start="4.8667" data-duration="1.8" data-track-index="1" data-reveal="rise">
+        <div class="meta mono">— 03 / 56 —　T+00:04:26</div><div class="line"><span class="txt">它會<em class="wmorph">漏掉能量</em></span></div></div>
+      <div id="sub-04" class="sub clip" data-start="6.6667" data-duration="2.3667" data-track-index="1" data-reveal="slam">
+        <div class="meta mono">— 04 / 56 —　T+00:06:20</div><div class="line"><span class="txt">然後<em>掉進</em>原子核</span></div></div>
+      <div id="sub-05" class="sub clip" data-start="9.0333" data-duration="0.9667" data-track-index="1" data-reveal="rise">
+        <div class="meta mono">— 05 / 56 —　T+00:09:01</div><div class="line"><span class="txt">可是，氫原子<em>好好的</em></span></div></div>
+
+      <div id="overlays" class="full">
+        <div class="tear abs" style="top:180px"></div><div class="tear abs" style="top:410px"></div>
+        <div class="tear abs" style="top:560px"></div><div class="tear abs" style="top:770px"></div>
+        <div id="neg" class="full"></div>
+        <div id="impactword" class="abs">掉進</div>
+        <div id="flash" class="full"></div>
+        <div id="fade" class="full"></div>
+      </div>
+    </div>
+
+    <script src="./gsap.min.js"></script>
+    <script>
+      // ---------- deterministic helpers ----------
+      function rng(seed) { return function () { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+      const SVGNS = "http://www.w3.org/2000/svg";
+      const FPS = 30, FILM = 4090 / FPS;          // full film length per 分鏡.md
+      const ACT_BOUNDS = [436, 1325, 2141, 2488, 3564].map((f) => f / FPS);
+      const T = { s1: 0, s2: 2.7, s3: 4.8667, s4: 6.6667, s5: 9.0333, end: 10 };
+
+      // ---------- background ----------
+      (function stars() {
+        const r = rng(11), g = document.getElementById("stars");
+        for (let i = 0; i < 220; i++) {
+          const c = document.createElementNS(SVGNS, "circle");
+          c.setAttribute("cx", (r() * 1920).toFixed(1)); c.setAttribute("cy", (r() * 1080).toFixed(1));
+          c.setAttribute("r", (0.5 + r() * 1.4).toFixed(2)); c.setAttribute("fill", "#cfe8ff");
+          c.setAttribute("opacity", (0.15 + r() * 0.6).toFixed(2)); g.appendChild(c);
+        }
+        const s = document.getElementById("streaks"), r2 = rng(5);
+        for (let i = 0; i < 140; i++) {
+          const a = r2() * Math.PI * 2, d0 = 80 + r2() * 700, len = 120 + r2() * 420;
+          const l = document.createElementNS(SVGNS, "line");
+          l.setAttribute("x1", 960 + Math.cos(a) * d0); l.setAttribute("y1", 430 + Math.sin(a) * d0);
+          l.setAttribute("x2", 960 + Math.cos(a) * (d0 + len)); l.setAttribute("y2", 430 + Math.sin(a) * (d0 + len));
+          l.setAttribute("stroke", i % 5 ? "#bfe9ff" : "#5ee7ff"); l.setAttribute("stroke-width", (0.6 + r2() * 1.6).toFixed(2));
+          l.setAttribute("stroke-opacity", (0.25 + r2() * 0.6).toFixed(2)); s.appendChild(l);
+        }
+        // panel data stream
+        const r3 = rng(77); let rows = [];
+        for (let i = 0; i < 24; i++) { let row = ""; for (let j = 0; j < 4; j++) row += Math.floor(r3() * 65536).toString(16).toUpperCase().padStart(4, "0") + "  "; rows.push(row.trim()); }
+        document.getElementById("pstream-in").textContent = rows.join("\n");
+        // progress ticks
+        const prog = document.getElementById("prog");
+        ACT_BOUNDS.forEach((b) => { const t = document.createElement("div"); t.className = "tick"; t.style.left = (b / FILM) * 1776 + "px"; prog.appendChild(t); });
+      })();
+
+      // ---------- electron simulation (pure function of time) ----------
+      const CX = 960, CY = 430, RX = 380, RY = 150, TILT = (-20 * Math.PI) / 180;
+      const W0 = (Math.PI * 2) / 2.4;
+      const C0 = T.s4 + 0.1, CD = 1.35;            // collapse in sim-time
+      const SLOW_AT = C0 + 1.2, SLOW = 0.25;        // last 0.15 sim-s plays at 0.25x
+      const IMPACT = SLOW_AT + (C0 + CD - SLOW_AT) / SLOW;   // real time of impact
+      const RW0 = T.s5, RW1 = T.s5 + 0.5;           // rewind window (real time)
+      const DT = 1 / 240, hist = [];               // sampled history, index = step
+      (function integrate() {
+        let ang = -0.6, t = 0;
+        for (let i = 0; t <= 12; i++, t += DT) {
+          const r = radiusAt(t);
+          const w = t < RW0 ? W0 / Math.pow(Math.max(r, 0.18), 1.4) : (t < RW1 ? -W0 * 3.2 : W0);
+          const step = DT * simRate(t);
+          hist.push({ ang, r });
+          ang += w * step;
+        }
+      })();
+      function simRate(t) { return t >= SLOW_AT && t < IMPACT ? SLOW : 1; }
+      function simTime(t) { return t < SLOW_AT ? t : (t < IMPACT ? SLOW_AT + (t - SLOW_AT) * SLOW : C0 + CD + (t - IMPACT)); }
+      function radiusAt(t) {
+        if (t < C0) return 1;
+        if (t < IMPACT) { const p = Math.min(1, (simTime(t) - C0) / CD); return 1 - Math.pow(p, 2.2) * 0.98; }
+        if (t < RW0) return 0.02;
+        if (t < RW1) { const p = (t - RW0) / (RW1 - RW0); return 0.02 + 0.98 * (1 - Math.pow(1 - p, 3)); }
+        return 1;
+      }
+      function stateAt(t) { const i = Math.max(0, Math.min(hist.length - 1, Math.round(t / DT))); return hist[i]; }
+      function pos(a, r) { const x = RX * r * Math.cos(a), y = RY * r * Math.sin(a);
+        return [CX + x * Math.cos(TILT) - y * Math.sin(TILT), CY + x * Math.sin(TILT) + y * Math.cos(TILT)]; }
+
+      const el = document.getElementById("electron"), lb = document.getElementById("elabel");
+      const NG = 12, NP = 54, ghosts = [], parts = [];
+      for (let i = 0; i < NG; i++) { const g = document.createElement("div"); g.className = "abs e ghost"; document.getElementById("ghosts").appendChild(g); ghosts.push(g); }
+      const pr = rng(31);
+      for (let i = 0; i < NP; i++) {
+        const p = document.createElement("div"); p.className = "abs e pt"; document.getElementById("parts").appendChild(p);
+        const born = T.s3 + 0.15 + (i / NP) * (IMPACT - T.s3 - 0.3) + pr() * 0.05;
+        parts.push({ p, born, a: pr() * Math.PI * 2, v: 40 + pr() * 90, life: 0.9 + pr() * 0.8 });
+      }
+      function trailAmt(t) {               // 0..1 how long/visible the trail is
+        if (t < T.s3) return 0.25;
+        if (t < T.s3 + 0.5) return 0.25 + 0.75 * ((t - T.s3) / 0.5);
+        if (t < RW1) return 1;
+        return 0.25;
+      }
+      function alive(t) { if (t < IMPACT) return 1; if (t < RW0) return 0; return Math.min(1, (t - RW0) / 0.15); }
+      function place(node, x, y, s) { node.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${s})`; }
+      function draw(t) {
+        const st = stateAt(t), [x, y] = pos(st.ang, st.r), a = alive(t), s = 0.4 + 0.6 * st.r;
+        place(el, x, y, s); el.style.opacity = a;
+        place(lb, x, y, 1); lb.style.opacity = a * labelOn(t);
+        const tr = trailAmt(t);
+        ghosts.forEach((g, k) => {
+          const lag = (k + 1) * (0.018 + 0.03 * tr), sg = stateAt(Math.max(0, t - lag)), [gx, gy] = pos(sg.ang, sg.r);
+          place(g, gx, gy, (0.35 + 0.6 * sg.r) * (1 - k / (NG + 2)));
+          g.style.opacity = a * (k < 3 + 9 * tr ? 1 : 0) * (0.7 - k * 0.05) * (0.35 + 0.65 * tr);
+        });
+        parts.forEach((q) => {
+          const age = t - q.born;
+          if (age < 0 || age > q.life || t > RW0) { q.p.style.opacity = 0; return; }
+          const sb = stateAt(q.born), [bx, by] = pos(sb.ang, sb.r);
+          place(q.p, bx + Math.cos(q.a) * q.v * age, by + Math.sin(q.a) * q.v * age + 18 * age * age, 1 - age / q.life * 0.5);
+          q.p.style.opacity = (1 - age / q.life) * 0.9;
+        });
+      }
+      let labelOn = (t) => (t < 1.4 ? 0 : Math.min(1, (t - 1.4) / 0.4)) * (t > T.s4 ? Math.max(0, 1 - (t - T.s4) / 0.3) : 1);
+
+      // ---------- subtitles ----------
+      const GLYPHS = "■□◆◇０１２３４５６７８９";
+      document.querySelectorAll(".sub .txt").forEach((txt) => {
+        const walk = (node, into) => {
+          [...node.childNodes].forEach((n) => {
+            if (n.nodeType === 3) {
+              [...n.textContent].forEach((c) => { const s = document.createElement("span"); s.className = "ch w"; s.textContent = c; s.dataset.c = c; into.appendChild(s); });
+            } else {
+              const e2 = n.cloneNode(false); into.appendChild(e2); walk(n, e2);
+              const ul = document.createElement("span"); ul.className = "ul"; e2.appendChild(ul);
+            }
+          });
+        };
+        const tmp = txt.cloneNode(true); txt.innerHTML = ""; walk(tmp, txt);
+      });
+
+      const tl = gsap.timeline({ paused: true });
+      const IR = { immediateRender: false };
+
+      // ---------- master clock drives the physics ----------
+      const clock = { t: 0 };
+      tl.to(clock, { t: 10, duration: 10, ease: "none", onUpdate: () => draw(clock.t) }, 0);
+
+      // ---------- opening: black -> point -> push-in ----------
+      tl.to("#fade", { opacity: 0, duration: 0.6, ease: "power2.out" }, 0);
+      tl.fromTo("#obj", { scale: 0.28, opacity: 0.0 }, { scale: 1, opacity: 1, duration: 1.1, ease: "expo.out", ...IR }, 0.25);
+      tl.fromTo("#stars", { scale: 0.75 }, { scale: 1, duration: 1.4, ease: "expo.out", ...IR }, 0.2);
+      tl.fromTo("#streaks", { scale: 0.5, opacity: 0 }, { keyframes: [{ scale: 1.1, opacity: 0.9, duration: 0.35, ease: "power2.in" }, { scale: 1.9, opacity: 0, duration: 0.6, ease: "expo.out" }], ...IR }, 0.2);
+      tl.fromTo("#grid", { opacity: 0 }, { opacity: 0.35, duration: 1.2, ...IR }, 0.6);
+      tl.fromTo("#bgword", { opacity: 0, x: 80 }, { opacity: 0.08, x: 0, duration: 1.4, ease: "expo.out", ...IR }, 0.5);
+      tl.to("#bgword", { x: -90, duration: 8, ease: "none" }, 1.9);
+      tl.fromTo(".orb", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.9, ease: "expo.out", ...IR }, 0.55);
+      tl.to("#nleader", { attr: { "stroke-dashoffset": 0 }, duration: 0.4, ease: "power2.out" }, 1.3);
+      tl.fromTo("#nlabel", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out", ...IR }, 1.55);
+      tl.to(["#nlabel", "#nleader"], { opacity: 0, duration: 0.25 }, T.s4);
+
+      // ---------- HUD ----------
+      tl.fromTo("#hud", { opacity: 0 }, { opacity: 1, duration: 0.6, ...IR }, 0.4);
+      tl.fromTo("#progfill", { scaleX: 0 }, { scaleX: 10 / FILM, duration: 10, ease: "none", ...IR }, 0);
+      tl.to("#badgering", { rotation: 90, svgOrigin: "50 50", duration: 10, ease: "none" }, 0);
+      tl.to(".corner", { opacity: 0.25, duration: 1.2, yoyo: true, repeat: 7, ease: "sine.inOut" }, 0.6);
+      decodeText(document.getElementById("actno"), "ACT 01", 0.5, 0.6, "0123456789#/_");
+      decodeText(document.getElementById("actname"), "／ 拋出問題", 0.65, 0.6, "■□◆◇");
+
+      // ---------- shot 2: classical sim panel + camera pan ----------
+      tl.to("#world", { x: -80, duration: 0.9, ease: "expo.inOut" }, T.s2 + 0.1);
+      tl.set("#panel", { opacity: 1 }, T.s2 + 0.15);
+      tl.fromTo("#panel .glass", { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 0.45, ease: "expo.out", ...IR }, T.s2 + 0.15);
+      tl.fromTo("#panel .scan", { opacity: 0 }, { keyframes: [{ opacity: 1, duration: 0.08 }, { opacity: 0, duration: 0.3 }], stagger: 0.05, ...IR }, T.s2 + 0.15);
+      tl.fromTo("#panel .br", { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out", ...IR }, T.s2 + 0.3);
+      tl.fromTo(["#plabel", "#pbar", "#pnum", "#pstream"], { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.06, ease: "expo.out", ...IR }, T.s2 + 0.4);
+      decodeText(document.getElementById("ptitle"), "CLASSICAL / SIM", T.s2 + 0.3, 0.7, "#$%&*+0123456789");
+      tl.fromTo("#pstream-in", { y: 0 }, { y: -400, duration: 7, ease: "none", ...IR }, T.s2 + 0.4);
+
+      // energy: 100 -> 35 during shot 3/4, odometer + bar
+      const energy = { v: 100 };
+      function drawEnergy() {
+        const v = energy.v, h = 48;
+        const fl = Math.floor(v), fr = v - fl, sm = (x) => x * x * (3 - 2 * x);
+        const onesOff = (fl % 10) + sm(Math.max(0, Math.min(1, (fr - 0.85) / 0.15)));
+        const tensOff = (Math.floor(fl / 10) % 10) + Math.max(0, onesOff - 9);
+        rollDigit("d2", onesOff); rollDigit("d1", tensOff);
+                document.getElementById("d0").style.opacity = v >= 99.5 ? 1 : 0;
+        document.getElementById("pfill").style.transform = `scaleX(${v / 100})`;
+      }
+      function rollDigit(id, off) {   // fade-roll: current digit slides up & fades, next rises in
+        const col = document.getElementById(id), a = col.children[0], b = col.children[1];
+        const d = Math.floor(off), q = off - d;
+        a.textContent = String(d % 10); b.textContent = String((d + 1) % 10);
+        a.style.transform = `translateY(${-q * 50}px)`; a.style.opacity = 1 - q;
+        b.style.transform = `translateY(${(1 - q) * 50}px)`; b.style.opacity = q;
+      }
+      drawEnergy();
+      tl.to(energy, { v: 35, duration: IMPACT - T.s3 - 0.1, ease: "power1.in", onUpdate: drawEnergy }, T.s3 + 0.1);
+
+      // ---------- shot 3: weight morph on 漏掉能量 ----------
+      tl.fromTo(".wmorph .ch", { fontWeight: 900 }, { fontWeight: 300, duration: 1.1, ease: "power2.inOut", stagger: 0.08, ...IR }, T.s3 + 0.55);
+
+      // ---------- shot 4: collapse, slow-mo, impact ----------
+      tl.to("#obj", { scale: 1.32, duration: IMPACT - (T.s4 + 0.6), ease: "power2.in" }, T.s4 + 0.6);
+      tl.to(".orb", { attr: { "stroke-opacity": 0.12 }, duration: 0.6 }, T.s4 + 0.2);
+      tl.to(":root", { "--hud": "#ff4d9a", duration: 0.2 }, T.s4 + 0.3);
+      tl.to("#pwarn", { opacity: 1, duration: 0.1, repeat: 5, yoyo: true }, T.s4 + 0.3);
+      tl.set("#neg", { opacity: 1 }, IMPACT);
+      tl.set("#neg", { opacity: 0 }, IMPACT + 2 / FPS);
+      tl.set("#impactword", { opacity: 1 }, IMPACT);
+      tl.set("#impactword", { opacity: 0 }, IMPACT + 2 / FPS);
+      tl.fromTo("#nucleus", { scale: 1 }, { keyframes: [{ scale: 1.35, duration: 0.08 }, { scale: 1, duration: 0.5, ease: "elastic.out(1, 0.4)" }], ...IR }, IMPACT);
+      tl.fromTo("#shock", { scale: 0.4, opacity: 1 }, { scale: 9, opacity: 0, duration: 0.7, ease: "expo.out", ...IR }, IMPACT);
+      tl.fromTo("#flare", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.18, ease: "expo.out", ...IR }, IMPACT);
+      tl.to("#flare", { opacity: 0, duration: 0.45 }, IMPACT + 0.18);
+      shake("#stage", IMPACT, 0.28, 10, 41);
+      tl.to("#obj", { scale: 1.12, duration: 0.4, ease: "expo.out" }, IMPACT + 0.05);
+
+      // ---------- shot 5: VHS rewind ----------
+      tl.fromTo("#rewind", { opacity: 0, scaleX: 1.5 }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "expo.out", ...IR }, T.s5);
+      tl.to("#rewind", { opacity: 0.35, duration: 0.12, repeat: 3, yoyo: true }, T.s5 + 0.35);
+      tl.fromTo(".tear", { opacity: 0, y: 0 }, { keyframes: [{ opacity: 0.9, duration: 0.05 }, { y: 120, duration: 0.45, ease: "none" }, { opacity: 0, duration: 0.05 }], stagger: 0.03, ...IR }, RW0);
+      tl.set("#obj", { filter: "drop-shadow(8px 0 0 rgba(255,77,154,.75)) drop-shadow(-8px 0 0 rgba(94,231,255,.75))" }, RW0);
+      tl.set("#obj", { filter: "none" }, RW1);
+      tl.to("#obj", { scale: 1, duration: 0.5, ease: "expo.out" }, RW0);
+      tl.to(".orb-line", { attr: { "stroke-opacity": 0.85 }, duration: 0.3 }, RW1 - 0.2);
+      tl.to(".orb-glow", { attr: { "stroke-opacity": 0.16 }, duration: 0.3 }, RW1 - 0.2);
+      tl.to(energy, { v: 100, duration: 0.5, ease: "expo.out", onUpdate: drawEnergy }, RW0);
+      tl.to("#pwarn", { opacity: 0, duration: 0.1 }, RW0);
+      tl.fromTo("#flash", { opacity: 0 }, { keyframes: [{ opacity: 0.55, duration: 1 / FPS }, { opacity: 0, duration: 0.25 }], ...IR }, RW1);
+      tl.to(":root", { "--hud": "#5ee7ff", duration: 0.2 }, RW1);
+
+      // ---------- subtitle reveals ----------
+      document.querySelectorAll(".sub").forEach((sub) => {
+        const t0 = parseFloat(sub.dataset.start) + parseFloat(sub.dataset.delay || 0.08);
+        const t1 = parseFloat(sub.dataset.start) + parseFloat(sub.dataset.duration);
+        const chars = [...sub.querySelectorAll(".ch")], ems = [...sub.querySelectorAll("em")], uls = [...sub.querySelectorAll(".ul")];
+        const meta = sub.querySelector(".meta"), txt = sub.querySelector(".txt"), kind = sub.dataset.reveal;
+        tl.fromTo(meta, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3, ease: "expo.out", ...IR }, t0 - 0.05);
+        if (kind === "rise") {
+          tl.fromTo(chars, { opacity: 0, y: 36, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, stagger: 0.03, ease: "expo.out", ...IR }, t0);
+        } else if (kind === "decode") {
+          tl.set(chars, { opacity: 1 }, t0);
+          chars.forEach((c, i) => {
+            const o = { p: 0 }, lock = 0.25 + (i / chars.length) * 0.6, r = rng(1000 + i);
+            const seq = Array.from({ length: 40 }, () => GLYPHS[Math.floor(r() * GLYPHS.length)]);
+            tl.fromTo(o, { p: 0 }, { p: 1, duration: 0.75, ease: "none", ...IR, onUpdate: () => {
+              c.textContent = o.p >= lock ? c.dataset.c : seq[Math.floor(o.p * 39)];
+              c.style.color = o.p >= lock ? "" : "rgba(94,231,255,.8)";
+            } }, t0);
+          });
+        } else if (kind === "scan") {
+          tl.set(chars, { opacity: 1 }, t0);
+          const wrap = document.createElement("span"); wrap.className = "scanwrap"; const line = document.createElement("span"); line.className = "scanline"; wrap.appendChild(line); txt.appendChild(wrap);
+          tl.fromTo(txt, { clipPath: "inset(-40% 100% -40% 0)" }, { clipPath: "inset(-40% 0% -40% 0)", duration: 0.75, ease: "power2.inOut", ...IR }, t0);
+          tl.fromTo(wrap, { xPercent: -100, opacity: 1 }, { xPercent: 0, opacity: 1, duration: 0.75, ease: "power2.inOut", ...IR }, t0);
+          tl.to(wrap, { opacity: 0, duration: 0.2 }, t0 + 0.75);
+        } else if (kind === "slam") {
+          tl.set(chars, { opacity: 1 }, t0);
+          tl.fromTo(txt, { scale: 1.8, opacity: 0, filter: "blur(14px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.22, ease: "power4.in", ...IR }, t0);
+          shake(sub, t0 + 0.22, 0.2, 6, 7);
+          if (ems.length) tl.fromTo(ems, { color: "#ffffff" }, { color: "#5ee7ff", duration: 0.2, ...IR }, t0 + 0.22 + 2 / FPS);
+        }
+        if (uls.length) tl.fromTo(uls, { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "expo.out", ...IR }, t0 + 0.45);
+        if (ems.length) tl.fromTo(ems, { textShadow: "0 0 22px rgba(0,183,255,.75), 0 0 60px rgba(0,183,255,.35)" },
+          { keyframes: [{ textShadow: "0 0 34px rgba(160,240,255,1), 0 0 110px rgba(0,183,255,.7)", duration: 0.25 },
+            { textShadow: "0 0 22px rgba(0,183,255,.75), 0 0 60px rgba(0,183,255,.35)", duration: 0.45 }], ...IR }, t0 + 0.5);
+        if (t1 < 10) {
+          tl.to(chars, { opacity: 0, y: -18, filter: "blur(6px)", duration: 0.25, stagger: 0.012, ease: "power2.in" }, t1 - 0.3);
+          tl.to([meta, ...uls], { opacity: 0, duration: 0.2 }, t1 - 0.25);
+        }
+      });
+
+      // ---------- helpers that add to tl ----------
+      function decodeText(node, final, t0, d, glyphs) {
+        const o = { p: 0 }, chars = [...final];
+        node.textContent = "";
+        tl.fromTo(o, { p: 0 }, { p: 1, duration: d, ease: "none", ...IR, onUpdate: () => {
+          const frame = Math.floor(o.p * d * FPS);
+          node.textContent = chars.map((c, i) => {
+            const lock = (i + 1) / (chars.length + 1);
+            if (o.p >= lock || c === " ") return c;
+            return o.p * 1.6 > lock ? glyphs[Math.floor(rng(i * 131 + frame * 7 + 3)() * glyphs.length)] : "";
+          }).join("");
+        } }, t0);
+      }
+      function shake(target, t0, d, amp, seed) {
+        const r = rng(seed), n = Math.round(d * FPS), kf = [];
+        for (let i = 0; i < n; i++) { const k = 1 - i / n; kf.push({ x: (r() * 2 - 1) * amp * k, y: (r() * 2 - 1) * amp * k, duration: 1 / FPS, ease: "none" }); }
+        kf.push({ x: 0, y: 0, duration: 1 / FPS, ease: "none" });
+        tl.to(target, { keyframes: kf }, t0);
+      }
+
+      draw(0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
