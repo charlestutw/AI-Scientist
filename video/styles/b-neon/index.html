@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hant" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <style>
+@font-face { font-family: WenKai; src: url(./fonts/wenkai.woff2) format("woff2"); }
+@font-face { font-family: NotoSansTC; font-weight: 500; src: url(./fonts/sans500.woff2) format("woff2"); }
+@font-face { font-family: NotoSansTC; font-weight: 900; src: url(./fonts/sans900.woff2) format("woff2"); }
+@font-face { font-family: NotoSerifTC; font-weight: 500; src: url(./fonts/serif500.woff2) format("woff2"); }
+@font-face { font-family: NotoSerifTC; font-weight: 900; src: url(./fonts/serif900.woff2) format("woff2"); }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1920px; height: 1080px; overflow: hidden; }
+#root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+.layer { position: absolute; inset: 0; }
+#electron, .ghost { position: absolute; left: 0; top: 0; border-radius: 50%; }
+.sub { position: absolute; left: 0; right: 0; text-align: center; }
+#qmark { position: absolute; }
+#elabel { position: absolute; left: 0; top: 0; padding-top: 150px; white-space: nowrap; line-height: 1.1; }
+
+body { background: #04050c; }
+#root { background: radial-gradient(ellipse at 50% 38%, #12183a 0%, #070915 55%, #02030a 100%); font-family: NotoSansTC, sans-serif; color: #fff; }
+#electron { width: 30px; height: 30px; background: #e9fbff; box-shadow: 0 0 12px 4px #5ee7ff, 0 0 40px 14px #00b7ff88; }
+.ghost { width: 22px; height: 22px; background: #5ee7ff; box-shadow: 0 0 18px 6px #00b7ff66; }
+#nucleus { position: absolute; left: 960px; top: 420px; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fff3d6 0%, #ffb24a 30%, #ff4d6d 70%, #9b1d4a 100%);
+  box-shadow: 0 0 40px 10px #ff6a4d88, 0 0 120px 40px #ff3d7f33; }
+#elabel { font-weight: 500; font-size: 34px; color: #bff6ff; text-shadow: 0 0 12px #00b7ff; margin-top: 14px; }
+.nlbl { position: absolute; left: 960px; top: 500px; transform: translateX(-50%); font-weight: 500; font-size: 34px; color: #ffd2b0; }
+.sub { bottom: 120px; font-weight: 900; font-size: 96px; letter-spacing: 0.02em; text-shadow: 0 6px 30px #000; }
+.sub em { font-style: normal; color: #5ee7ff; text-shadow: 0 0 24px #00b7ffaa; }
+#qmark { left: 1340px; top: 170px; font-family: NotoSansTC; font-weight: 900; font-size: 300px; color: #ff4d9a; text-shadow: 0 0 40px #ff4d9a99; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      
+<svg class="layer" width="1920" height="1080"><circle cx="1716" cy="453" r="1.14" fill="#cfe8ff" opacity="0.83"/><circle cx="291" cy="600" r="0.90" fill="#cfe8ff" opacity="0.26"/><circle cx="1182" cy="567" r="1.97" fill="#cfe8ff" opacity="0.61"/><circle cx="1557" cy="1050" r="0.99" fill="#cfe8ff" opacity="0.72"/><circle cx="1720" cy="785" r="1.26" fill="#cfe8ff" opacity="0.51"/><circle cx="247" cy="180" r="0.67" fill="#cfe8ff" opacity="0.70"/><circle cx="1666" cy="707" r="0.77" fill="#cfe8ff" opacity="0.57"/><circle cx="841" cy="374" r="1.56" fill="#cfe8ff" opacity="0.72"/><circle cx="380" cy="53" r="0.69" fill="#cfe8ff" opacity="0.51"/><circle cx="907" cy="280" r="1.87" fill="#cfe8ff" opacity="0.34"/><circle cx="806" cy="239" r="1.97" fill="#cfe8ff" opacity="0.41"/><circle cx="573" cy="138" r="1.44" fill="#cfe8ff" opacity="0.84"/><circle cx="128" cy="209" r="1.83" fill="#cfe8ff" opacity="0.71"/><circle cx="1631" cy="924" r="1.07" fill="#cfe8ff" opacity="0.58"/><circle cx="1674" cy="915" r="1.06" fill="#cfe8ff" opacity="0.57"/><circle cx="1649" cy="918" r="1.04" fill="#cfe8ff" opacity="0.56"/><circle cx="196" cy="861" r="1.66" fill="#cfe8ff" opacity="0.79"/><circle cx="1395" cy="104" r="1.30" fill="#cfe8ff" opacity="0.74"/><circle cx="46" cy="535" r="1.34" fill="#cfe8ff" opacity="0.77"/><circle cx="101" cy="802" r="1.96" fill="#cfe8ff" opacity="0.60"/><circle cx="1352" cy="945" r="0.86" fill="#cfe8ff" opacity="0.83"/><circle cx="327" cy="148" r="1.30" fill="#cfe8ff" opacity="0.74"/><circle cx="18" cy="699" r="0.89" fill="#cfe8ff" opacity="0.65"/><circle cx="921" cy="598" r="1.27" fill="#cfe8ff" opacity="0.72"/><circle cx="1036" cy="21" r="0.63" fill="#cfe8ff" opacity="0.47"/><circle cx="347" cy="768" r="0.96" fill="#cfe8ff" opacity="0.70"/><circle cx="1078" cy="159" r="1.17" fill="#cfe8ff" opacity="0.65"/><circle cx="525" cy="458" r="0.81" fill="#cfe8ff" opacity="0.40"/><circle cx="144" cy="849" r="1.26" fill="#cfe8ff" opacity="0.51"/><circle cx="1071" cy="1036" r="0.84" fill="#cfe8ff" opacity="0.82"/><circle cx="154" cy="299" r="1.06" fill="#cfe8ff" opacity="0.57"/><circle cx="1473" cy="238" r="1.39" fill="#cfe8ff" opacity="0.40"/><circle cx="1364" cy="853" r="0.91" fill="#cfe8ff" opacity="0.27"/><circle cx="1347" cy="344" r="1.64" fill="#cfe8ff" opacity="0.58"/><circle cx="574" cy="79" r="1.23" fill="#cfe8ff" opacity="0.69"/><circle cx="437" cy="762" r="0.64" fill="#cfe8ff" opacity="0.28"/><circle cx="1112" cy="185" r="1.77" fill="#cfe8ff" opacity="0.47"/><circle cx="1815" cy="380" r="1.36" fill="#cfe8ff" opacity="0.78"/><circle cx="930" cy="427" r="1.17" fill="#cfe8ff" opacity="0.25"/><circle cx="1513" cy="334" r="1.27" fill="#cfe8ff" opacity="0.32"/><circle cx="540" cy="733" r="0.80" fill="#cfe8ff" opacity="0.39"/><circle cx="1067" cy="488" r="1.53" fill="#cfe8ff" opacity="0.70"/><circle cx="1606" cy="271" r="1.40" fill="#cfe8ff" opacity="0.81"/><circle cx="1245" cy="90" r="0.76" fill="#cfe8ff" opacity="0.36"/><circle cx="32" cy="657" r="0.74" fill="#cfe8ff" opacity="0.75"/><circle cx="383" cy="252" r="1.81" fill="#cfe8ff" opacity="0.70"/><circle cx="1322" cy="483" r="0.66" fill="#cfe8ff" opacity="0.69"/><circle cx="1809" cy="350" r="1.16" fill="#cfe8ff" opacity="0.84"/><circle cx="1636" cy="1045" r="0.80" fill="#cfe8ff" opacity="0.39"/><circle cx="1043" cy="896" r="1.07" fill="#cfe8ff" opacity="0.58"/><circle cx="1358" cy="487" r="1.11" fill="#cfe8ff" opacity="0.41"/><circle cx="1029" cy="258" r="1.04" fill="#cfe8ff" opacity="0.56"/><circle cx="1896" cy="57" r="1.09" fill="#cfe8ff" opacity="0.59"/><circle cx="1255" cy="364" r="1.41" fill="#cfe8ff" opacity="0.42"/><circle cx="1330" cy="787" r="1.06" fill="#cfe8ff" opacity="0.57"/><circle cx="313" cy="446" r="1.73" fill="#cfe8ff" opacity="0.84"/><circle cx="684" cy="93" r="1.89" fill="#cfe8ff" opacity="0.75"/><circle cx="1275" cy="288" r="1.07" fill="#cfe8ff" opacity="0.78"/><circle cx="470" cy="23" r="0.66" fill="#cfe8ff" opacity="0.29"/><circle cx="685" cy="570" r="1.90" fill="#cfe8ff" opacity="0.36"/><circle cx="1328" cy="569" r="1.71" fill="#cfe8ff" opacity="0.63"/><circle cx="79" cy="36" r="1.81" fill="#cfe8ff" opacity="0.50"/><circle cx="698" cy="507" r="1.06" fill="#cfe8ff" opacity="0.77"/><circle cx="1377" cy="950" r="0.64" fill="#cfe8ff" opacity="0.48"/><circle cx="628" cy="453" r="0.97" fill="#cfe8ff" opacity="0.51"/><circle cx="1635" cy="136" r="1.07" fill="#cfe8ff" opacity="0.38"/><circle cx="1758" cy="743" r="1.06" fill="#cfe8ff" opacity="0.37"/><circle cx="597" cy="698" r="1.56" fill="#cfe8ff" opacity="0.52"/><circle cx="1272" cy="41" r="0.86" fill="#cfe8ff" opacity="0.83"/><circle cx="183" cy="604" r="1.93" fill="#cfe8ff" opacity="0.58"/><circle cx="1602" cy="299" r="1.69" fill="#cfe8ff" opacity="0.61"/><circle cx="1673" cy="790" r="1.73" fill="#cfe8ff" opacity="0.44"/><circle cx="700" cy="205" r="2.00" fill="#cfe8ff" opacity="0.43"/><circle cx="971" cy="272" r="0.73" fill="#cfe8ff" opacity="0.54"/><circle cx="1766" cy="159" r="1.74" fill="#cfe8ff" opacity="0.45"/><circle cx="1277" cy="1074" r="0.87" fill="#cfe8ff" opacity="0.64"/><circle cx="1472" cy="697" r="1.66" fill="#cfe8ff" opacity="0.39"/><circle cx="1823" cy="700" r="0.67" fill="#cfe8ff" opacity="0.70"/><circle cx="842" cy="251" r="1.00" fill="#cfe8ff" opacity="0.73"/><circle cx="817" cy="606" r="1.44" fill="#cfe8ff" opacity="0.44"/><circle cx="4" cy="149" r="1.83" fill="#cfe8ff" opacity="0.71"/><circle cx="51" cy="320" r="1.64" fill="#cfe8ff" opacity="0.38"/><circle cx="878" cy="719" r="1.00" fill="#cfe8ff" opacity="0.53"/><circle cx="1061" cy="1010" r="1.84" fill="#cfe8ff" opacity="0.72"/><circle cx="1672" cy="657" r="0.97" fill="#cfe8ff" opacity="0.31"/><circle cx="1159" cy="140" r="0.90" fill="#cfe8ff" opacity="0.46"/><circle cx="82" cy="539" r="1.91" fill="#cfe8ff" opacity="0.37"/><circle cx="473" cy="822" r="1.27" fill="#cfe8ff" opacity="0.52"/><circle cx="1740" cy="613" r="1.14" fill="#cfe8ff" opacity="0.83"/><circle cx="1435" cy="256" r="0.73" fill="#cfe8ff" opacity="0.74"/><circle cx="118" cy="1055" r="1.06" fill="#cfe8ff" opacity="0.77"/><circle cx="1741" cy="802" r="0.81" fill="#cfe8ff" opacity="0.80"/><circle cx="1360" cy="201" r="0.63" fill="#cfe8ff" opacity="0.27"/><circle cx="111" cy="548" r="1.30" fill="#cfe8ff" opacity="0.54"/><circle cx="986" cy="467" r="1.11" fill="#cfe8ff" opacity="0.81"/><circle cx="1153" cy="838" r="1.96" fill="#cfe8ff" opacity="0.80"/><circle cx="916" cy="125" r="0.97" fill="#cfe8ff" opacity="0.31"/><circle cx="1283" cy="168" r="1.01" fill="#cfe8ff" opacity="0.74"/><circle cx="894" cy="431" r="1.51" fill="#cfe8ff" opacity="0.69"/><circle cx="757" cy="642" r="1.84" fill="#cfe8ff" opacity="0.32"/><circle cx="536" cy="561" r="1.54" fill="#cfe8ff" opacity="0.31"/><circle cx="983" cy="780" r="1.47" fill="#cfe8ff" opacity="0.66"/><circle cx="1506" cy="611" r="1.74" fill="#cfe8ff" opacity="0.45"/><circle cx="681" cy="902" r="0.87" fill="#cfe8ff" opacity="0.84"/><circle cx="1372" cy="493" r="1.20" fill="#cfe8ff" opacity="0.27"/><circle cx="235" cy="680" r="1.47" fill="#cfe8ff" opacity="0.66"/><circle cx="1158" cy="967" r="0.60" fill="#cfe8ff" opacity="0.25"/><circle cx="1693" cy="970" r="1.84" fill="#cfe8ff" opacity="0.52"/><circle cx="608" cy="97" r="0.69" fill="#cfe8ff" opacity="0.51"/><circle cx="703" cy="804" r="0.90" fill="#cfe8ff" opacity="0.46"/><circle cx="490" cy="491" r="1.97" fill="#cfe8ff" opacity="0.81"/><circle cx="1745" cy="630" r="1.44" fill="#cfe8ff" opacity="0.64"/><circle cx="1572" cy="405" r="1.26" fill="#cfe8ff" opacity="0.71"/><circle cx="1363" cy="336" r="1.07" fill="#cfe8ff" opacity="0.38"/><circle cx="910" cy="223" r="1.17" fill="#cfe8ff" opacity="0.25"/><circle cx="69" cy="322" r="0.87" fill="#cfe8ff" opacity="0.64"/><circle cx="936" cy="513" r="0.69" fill="#cfe8ff" opacity="0.71"/><circle cx="1703" cy="228" r="1.64" fill="#cfe8ff" opacity="0.38"/><circle cx="1138" cy="419" r="1.17" fill="#cfe8ff" opacity="0.45"/><circle cx="889" cy="430" r="1.39" fill="#cfe8ff" opacity="0.60"/><circle cx="1260" cy="221" r="1.89" fill="#cfe8ff" opacity="0.35"/><circle cx="571" cy="288" r="1.99" fill="#cfe8ff" opacity="0.82"/><circle cx="1686" cy="463" r="1.17" fill="#cfe8ff" opacity="0.45"/><circle cx="1261" cy="562" r="0.70" fill="#cfe8ff" opacity="0.52"/><circle cx="1008" cy="585" r="1.60" fill="#cfe8ff" opacity="0.55"/><circle cx="527" cy="276" r="0.67" fill="#cfe8ff" opacity="0.50"/><circle cx="1530" cy="355" r="1.91" fill="#cfe8ff" opacity="0.57"/><circle cx="1057" cy="278" r="1.79" fill="#cfe8ff" opacity="0.28"/><circle cx="52" cy="685" r="1.49" fill="#cfe8ff" opacity="0.47"/><circle cx="931" cy="160" r="1.36" fill="#cfe8ff" opacity="0.78"/><circle cx="1310" cy="719" r="0.83" fill="#cfe8ff" opacity="0.41"/><circle cx="149" cy="970" r="1.44" fill="#cfe8ff" opacity="0.44"/><circle cx="1080" cy="777" r="1.14" fill="#cfe8ff" opacity="0.43"/><circle cx="1783" cy="1020" r="1.81" fill="#cfe8ff" opacity="0.70"/><circle cx="1026" cy="75" r="0.89" fill="#cfe8ff" opacity="0.65"/><circle cx="1737" cy="462" r="1.56" fill="#cfe8ff" opacity="0.52"/><circle cx="124" cy="789" r="0.63" fill="#cfe8ff" opacity="0.67"/><circle cx="523" cy="128" r="1.59" fill="#cfe8ff" opacity="0.74"/><circle cx="1446" cy="751" r="1.57" fill="#cfe8ff" opacity="0.73"/><circle cx="317" cy="946" r="1.27" fill="#cfe8ff" opacity="0.72"/>
+  <g id="orbit" transform="rotate(-20.05 960 420)">
+    <ellipse cx="960" cy="420" rx="380" ry="150" fill="none" stroke="#5ee7ff" stroke-opacity=".18" stroke-width="14"/>
+    <ellipse cx="960" cy="420" rx="380" ry="150" fill="none" stroke="#7af0ff" stroke-opacity=".8" stroke-width="2.5"/>
+  </g>
+</svg>
+<div id="nucleus"></div>
+<div class="nlbl">原子核</div>
+
+      <div class="ghost"></div><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div>
+      <div id="electron"></div>
+      <div id="elabel" class="elbl">電子</div>
+      <div id="qmark" class="clip" data-start="10" data-duration="2" data-track-index="2">？</div>
+      <div id="s1-sub-1" class="sub clip" data-start="0" data-duration="2" data-track-index="1">電子一直繞著<em>原子核</em>轉</div><div id="s1-sub-2" class="sub clip" data-start="2" data-duration="2" data-track-index="1">照舊物理的算法……</div><div id="s1-sub-3" class="sub clip" data-start="4" data-duration="2" data-track-index="1">它會<em>漏掉能量</em></div><div id="s1-sub-4" class="sub clip" data-start="6" data-duration="2" data-track-index="1">然後<em>掉進</em>原子核</div><div id="s1-sub-5" class="sub clip" data-start="8" data-duration="2" data-track-index="1">可是，氫原子好好的</div><div id="s1-sub-6" class="sub clip" data-start="10" data-duration="2" data-track-index="1">為什麼？<em>先猜猜看</em></div>
+    </div>
+    
+<script src="./gsap.min.js"></script>
+<script>
+  window.__timelines = window.__timelines || {};
+  const tl = gsap.timeline({ paused: true });
+  const CX = 960, CY = 420, RX = 380, RY = 150, TILT = -0.35;
+  const e = document.getElementById("electron");
+  const ghosts = Array.from(document.querySelectorAll(".ghost"));
+  const st = { ang: -0.6, rad: 1, trail: 0, alive: 1 };
+  const cos = Math.cos(TILT), sin = Math.sin(TILT);
+  function place(el, a, r) {
+    const x = RX * r * Math.cos(a), y = RY * r * Math.sin(a);
+    const px = CX + x * cos - y * sin, py = CY + x * sin + y * cos;
+    el.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%) scale(${0.35 + 0.65 * r})`;
+  }
+  const lb = document.getElementById("elabel");
+  function render() {
+    place(e, st.ang, st.rad);
+    place(lb, st.ang, st.rad);
+    e.style.opacity = st.alive;
+    lb.style.opacity = st.alive;
+    ghosts.forEach((g, i) => {
+      const k = i + 1;
+      place(g, st.ang - k * 0.16, Math.min(1, st.rad + k * 0.03 * (1 - st.rad)));
+      g.style.opacity = st.trail * st.alive * (1 - k / (ghosts.length + 1));
+    });
+  }
+  tl.to(st, { ang: -0.6 + Math.PI * 2 * 5, duration: 12, ease: "none", onUpdate: render }, 0);
+  tl.to(st, { trail: 1, duration: 0.6, onUpdate: render }, 4);
+  tl.to(st, { rad: 0.02, duration: 1.8, ease: "power2.in", onUpdate: render }, 6);
+  tl.to(st, { alive: 0, duration: 0.2, onUpdate: render }, 7.7);
+  tl.to("#nucleus", { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1 }, 7.8);
+  tl.set(st, { rad: 1, trail: 0, onUpdate: render }, 8);
+  tl.to(st, { alive: 1, duration: 0.5, onUpdate: render }, 8.1);
+  tl.fromTo("#orbit", { opacity: 1 }, { opacity: 0.25, duration: 0.6 }, 6);
+  tl.to("#orbit", { opacity: 1, duration: 0.5 }, 8.1);
+  tl.fromTo("#qmark", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 10);
+  document.querySelectorAll(".sub").forEach((s) => {
+    const t0 = parseFloat(s.dataset.start);
+    tl.fromTo(s, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, t0);
+  });
+  render();
+  window.__timelines["main"] = tl;
+  tl.seek(0);
+</script>
+
+  </body>
+</html>
